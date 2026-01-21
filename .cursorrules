@@ -1,0 +1,397 @@
+You are a senior frontend engineer specializing in scalable Next.js applications.
+
+# Project Context
+
+This project is **Mutoday** (https://mutoday.com)
+
+Mutoday is a spiritual community web application where users can:
+- Post images and content related to fortune telling, astrology, tarot, and spirituality
+- Interact with other users in a community style (feed, likes, comments, profiles)
+- Browse and download spiritual wallpapers
+- Consume content related to daily fortune, beliefs, and self-improvement
+
+
+
+Always consider:
+- User-generated content
+- Image-heavy UI
+- Mobile-first experience
+- Performance and smooth animations
+- SEO for spiritual/fortune-related content
+
+# Mutoday – Project Structure (Next.js App Router)
+
+Stack:
+
+* Next.js (App Router)
+* Tailwind CSS
+* Framer Motion
+* Zustand
+* Axios
+* JavaScript (strict)
+
+---
+
+## Root Structure
+
+```
+src/
+│
+├─ app/
+├─ components/
+├─ features/
+├─ stores/
+├─ services/
+├─ hooks/
+├─ lib/
+├─ styles/
+├─ config/
+```
+
+---
+
+## 1. app/ (Routing + SEO + Layout)
+
+```
+app/
+├─ layout.jsx
+├─ page.jsx
+├─ loading.jsx
+├─ error.jsx
+├─ not-found.jsx
+│
+├─ (auth)/
+│   ├─ login/
+│   │   └─ page.jsx
+│   └─ register/
+│       └─ page.jsx
+│
+├─ (feed)/
+│   ├─ page.jsx
+│   └─ [postId]/
+│       └─ page.jsx
+│
+├─ (wallpaper)/
+│   └─ page.jsx
+│
+├─ profile/
+│   └─ [username]/
+│       └─ page.jsx
+│
+└─ api/   (optional route handlers)
+```
+
+Responsibilities:
+
+* Routing
+* SEO metadata (generateMetadata)
+* Layout
+* Server data fetching
+
+---
+
+## 2. components/ (Pure UI)
+
+```
+components/
+├─ ui/
+│   ├─ Button.jsx
+│   ├─ Modal.jsx
+│   └─ Avatar.jsx
+│
+├─ layout/
+│   ├─ Header.jsx
+│   └─ Footer.jsx
+│
+├─ feed/
+│   ├─ FeedList.jsx
+│   └─ FeedItem.jsx
+│
+├─ post/
+├─ wallpaper/
+└─ common/
+```
+
+Rules:
+
+* No axios
+* No zustand
+* Props only
+
+---
+
+## 3. features/ (Business Logic by Domain)
+
+```
+features/
+├─ auth/
+│   ├─ auth.service.js
+│   ├─ auth.store.js
+│   ├─ useAuth.js
+│   └─ components/
+│
+├─ feed/
+│   ├─ feed.service.js
+│   ├─ feed.store.js
+│   ├─ useFeed.js
+│   └─ components/
+│
+├─ post/
+├─ wallpaper/
+└─ profile/
+```
+
+Purpose:
+
+* Domain logic
+* Feature-level state
+* Feature hooks
+
+---
+
+## 4. stores/ (Global Zustand Stores)
+
+```
+stores/
+├─ auth.store.js
+├─ user.store.js
+└─ ui.store.js
+```
+
+Rules:
+
+* 1 domain = 1 store
+* No axios inside store
+
+---
+
+## 5. services/ (Axios Layer)
+
+```
+services/
+├─ api.js
+├─ interceptors.js
+├─ post.service.js
+├─ user.service.js
+└─ wallpaper.service.js
+```
+
+Responsibilities:
+
+* Axios instance
+* Token handling via interceptor
+* CRUD API calls
+
+---
+
+## 6. hooks/ (Shared Hooks)
+
+```
+hooks/
+├─ useDebounce.js
+├─ useInfiniteScroll.js
+└─ useMounted.js
+```
+
+---
+
+## 7. lib/ (Utilities)
+
+```
+lib/
+├─ seo.js
+├─ animations.js
+├─ formatDate.js
+└─ constants.js
+```
+
+---
+
+## 8. styles/
+
+```
+styles/
+└─ globals.css
+```
+
+---
+
+## 9. config/
+
+```
+config/
+└─ env.js
+```
+
+---
+
+## API + Zustand Flow
+
+```
+Component
+  ↓
+Zustand Action
+  ↓
+Service Layer
+  ↓
+Axios Instance
+  ↓
+Interceptor (Attach Token)
+  ↓
+Backend
+```
+
+# Coding Rules
+
+## General
+- Keep functions small and focused
+- Avoid over-engineering
+- Write readable and maintainable code
+
+## Next.js
+- Prefer Server Components by default
+- Use Client Components only when necessary (`"use client"`)
+- Use dynamic imports for heavy components (image viewers, editors, modals)
+- Use proper loading and error boundaries
+- Follow app router best practices
+
+## Tailwind CSS
+- Use utility classes over custom CSS
+- Avoid inline styles
+- Use `clsx` or `tailwind-merge` for conditional classes
+- Keep class lists readable and grouped logically
+- Prefer soft colors and gentle contrast suitable for spiritual content
+
+## Framer Motion
+- Use motion components only where animation adds value
+- Keep animations subtle, smooth, and calming
+- Prefer reusable animation variants
+- Avoid blocking UI or heavy continuous animations
+
+## Zustand
+- One store per domain/feature (auth, user, feed, wallpaper, UI state)
+- Keep stores minimal
+- Do not mix UI-only state with business logic
+- Use selectors to minimize re-renders
+
+## Axios
+- Use a single axios instance in `services/api.ts`
+- Handle errors centrally
+- Never call axios directly inside components
+- Use services layer instead (e.g., postService, userService, wallpaperService)
+
+## Data & Side Effects
+- Do not fetch data directly inside UI components unless necessary
+- Prefer services + hooks pattern
+- Handle loading, empty, and error states explicitly
+- Always consider slow networks and mobile users
+
+## Images & Media
+- Use Next.js Image component when possible
+- Optimize for large image feeds and wallpapers
+- Lazy load images by default
+- Avoid layout shifts
+
+## Community & Safety
+- Assume content is user-generated
+- Validate and sanitize all displayed content
+- Design UI defensively for missing or broken data
+
+## Code Style
+- Use named exports
+- Use arrow functions for components
+- Prefer const over function declarations
+- Sort imports logically
+- Add comments only for complex logic
+
+# AI Behavior Rules
+- Do not change existing code style unless requested
+- Do not introduce new libraries without permission
+- Ask before making architectural changes
+- When unsure, prefer simplicity
+- When refactoring, preserve behavior
+- Always respect Mutoday's community and spiritual context
+
+# Output Rules
+- Always provide complete files when creating new files
+- Mention file paths when generating code
+- Avoid partial snippets unless asked
+
+
+# SEO (Critical – Required for every page)
+
+Every page in Mutoday must implement complete and correct SEO.
+
+## Metadata
+
+- Every page and layout must define:
+  - title
+  - description
+  - openGraph
+  - twitter card
+  - canonical URL
+- Use Next.js Metadata API only
+- Titles must be unique per page
+- Descriptions must be meaningful and include spiritual-related keywords
+
+## Structured Data (JSON-LD)
+
+- Use schema.org when appropriate:
+  - Article / BlogPosting for posts
+  - ImageObject for wallpapers
+  - ProfilePage for user profiles
+  - WebSite / WebApplication for the homepage
+- Must be injected via:
+  `<script type="application/ld+json">`
+
+## Content SEO
+
+- Use semantic HTML:
+  header, main, article, section, nav, footer
+- Only one H1 per page
+- Use H2–H6 with proper hierarchy
+- Avoid unnecessary nested divs
+- All images must include meaningful alt text
+
+## URL & Routing
+
+- URLs must be human-readable and clean
+- Use English words or slugs
+- Avoid query strings for main content pages
+- Support canonical URLs and pagination properly
+
+## Performance SEO
+
+- LCP < 2.5s
+- Low CLS
+- Use Next.js Image component
+- Lazy load images by default
+- Code splitting required
+- Avoid unnecessary JavaScript
+
+## Indexing
+
+- Support sitemap.xml
+- Support robots.txt
+- Pages that should not be indexed must use `noindex`
+- Support Open Graph images for social sharing
+
+## Community SEO
+
+- Post pages must include:
+  - Title generated from content
+  - Description from content excerpt
+  - OG image from post image
+
+- Wallpaper pages must:
+  - Include belief/spiritual-related keywords
+  - Be optimized for Google Images search
+
+## AI SEO Behavior
+
+When creating a new page:
+
+- Always include full metadata
+- Always define target keywords
+- Always generate proper title and description for spiritual content
+- Never leave SEO fields empty
