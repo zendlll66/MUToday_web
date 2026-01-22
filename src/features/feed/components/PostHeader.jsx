@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const PostHeader = ({ user, createdAt, isOwner }) => {
+const PostHeader = ({ user, createdAt, isOwner, isFirstPost = false }) => {
   if (!user) {
     return null
   }
@@ -15,6 +15,7 @@ const PostHeader = ({ user, createdAt, isOwner }) => {
           fill
           className='object-cover'
           sizes='40px'
+          priority={isFirstPost}
         />
       </div>
       <div className='flex-1 min-w-0'>

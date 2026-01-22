@@ -1,70 +1,48 @@
+"use client"
 import React from 'react'
+import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
-const PostContent = ({ postDetail, hashTag, user, createdAt }) => {
+const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage }) => {
     if (!postDetail && (!hashTag || hashTag.length === 0)) {
         return null
     }
 
-    // แปลง hashtags ใน postDetail เป็น links หรือ highlight
-    const formatContent = (text) => {
+    // ใช้ textColor จาก backgroundImage ถ้ามี
+    const textColor = backgroundImage?.textColor || '#000000'
+
+
+
+    // Format content with hashTag array highlighting
+    const formatContentWithHashTags = (text) => {
         if (!text) return null
 
-        // แยกข้อความที่มี # และไม่มี #
-        const parts = text.split(/(#\w+)/g)
+        // ถ้ามี hashTag array ให้ highlight คำเหล่านั้น
+        if (hashTag && hashTag.length > 0) {
+            return highlightHashTags(text, hashTag, textColor)
+        }
 
-        return (
-            <div className='whitespace-pre-wrap'>
-                {parts.map((part, index) => {
-                    if (part.startsWith('#')) {
-                        return (
-                            <span
-                                key={index}
-                                className='text-mu-violet font-medium cursor-pointer hover:underline'
-                            >
-                                {part}
-                            </span>
-                        )
-                    }
-                    return <span key={index}>{part}</span>
-                })}
-            </div>
-        )
+        // ถ้าไม่มี hashTag array ให้ highlight แค่ #hashtag
+        return formatHashtagsInText(text, textColor)
     }
 
     return (
-        <div className=' py-3 space-y-2  text-black'>
+        <div className=' space-y-2' style={{ color: textColor }}>
             <div className='flex flex-row gap-2'>
                 {user?.displayName && (
-                    <div className='font-semibold text-sm text-black mb-1'>
+                    <div className='font-semibold text-sm mb-1' style={{ color: textColor }}>
                         {user.displayName}
                     </div>
                 )}
                 {postDetail && (
-                    <div className='text-sm leading-relaxed'>
-                        {formatContent(postDetail)}
+                    <div className='text-sm leading-relaxed' style={{ color: textColor }}>
+                        {formatContentWithHashTags(postDetail)}
                     </div>
                 )}
             </div>
 
-            {hashTag && hashTag.length > 0 && (
-                <div className='flex flex-wrap gap-1.5 pt-1'>
-                    {hashTag.slice(0, 10).map((tag, index) => (
-                        <span
-                            key={index}
-                            className='inline-block text-xs text-mu-violet bg-mu-button px-2 py-1 rounded-full cursor-pointer hover:bg-opacity-80 transition-colors'
-                        >
-                            #{tag}
-                        </span>
-                    ))}
-                    {hashTag.length > 10 && (
-                        <span className='text-xs text-gray-500'>
-                            +{hashTag.length - 10} เพิ่มเติม
-                        </span>
-                    )}
-                </div>
-            )}
+            
 
-            <p className='text-[12px] font-medium text-[#AAAAAA] mt-0.5'>
+            <p className='text-[12px] font-medium mt-0.5' style={{ color: textColor }}>
                 {createdAt || 'ไม่ทราบเวลา'}
             </p>
         </div>
