@@ -2,7 +2,7 @@ import React from 'react'
 
 const CardAbount = () => {
     return (
-        <div className='w-full max-w-[810px] mx-auto px-4 py-8'>
+        <div className='w-full max-w-[810px] mx-auto px-4'>
             <div className='bg-white py-[36px] px-[56px] rounded-3xl border  border-black/20 '>
                 {/* Section 1: MUToday คืออะไร ? */}
                 <section className=''>

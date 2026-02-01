@@ -1,6 +1,7 @@
 import CardAbount from '@/features/about/components/CardAbount'
 import CardContact from '@/features/about/components/CardContact'
 import Accordion from '@/components/ui/Accordion'
+import CircularGradientBg from '@/components/ui/CircularGradientBg'
 
 const page = () => {
     const faqData = [
@@ -31,15 +32,31 @@ const page = () => {
     ]
 
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-4xl font-medium text-black mt-[88px]'>เกี่ยวกับมูทูเดย์</h1>
-            <CardAbount />
-            <Accordion
-                title="คำถามที่พบบ่อย"
-                subtitle="Frequently Asked Questions"
-                items={faqData}
+        <div className='relative min-h-screen'>
+            {/* Background ด้านบน */}
+            <CircularGradientBg 
+                className="absolute top-0 left-[-20%] right-0 h-[600px] z-0"
+                position="top"
             />
-            <CardContact />
+            
+            {/* Background ด้านล่าง */}
+            <CircularGradientBg 
+                className="absolute bottom-0 left-[-20%] right-0 h-[600px] z-0"
+                position="bottom"
+            />
+            
+            <div className='relative flex flex-col items-center justify-center z-10'>
+                <h1 className='text-4xl font-medium text-black mt-[88px] mb-[44px]'>เกี่ยวกับมูทูเดย์</h1>
+                <div className='flex flex-col gap-5 mb-[120px]'>
+                    <CardAbount />
+                    <Accordion
+                        title="คำถามที่พบบ่อย"
+                        subtitle="Frequently Asked Questions"
+                        items={faqData}
+                    />
+                    <CardContact />
+                </div>
+            </div>
         </div>
     )
 }

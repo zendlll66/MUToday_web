@@ -3,7 +3,7 @@ import { MapPin, Mail, Facebook } from 'lucide-react'
 
 const CardContact = () => {
     return (
-        <div className='w-full max-w-[810px] mx-auto px-4 py-8'>
+        <div className='w-full max-w-[810px] mx-auto px-4'>
             <div className='bg-white py-[36px] px-[56px] rounded-3xl border border-black/20'>
                 <div className='flex flex-row gap-8 md:gap-12'>
                     {/* Left Section - Address */}
