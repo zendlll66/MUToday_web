@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         <SideBar />
         <main className="pt-14 md:pt-0 md:ml-16 lg:ml-64">
-          {children}
+        {children}
         </main>
       </body>
     </html>
