@@ -1,5 +1,6 @@
 import React from 'react'
-import ClubContent from '@/features/clubs/components/ClubContent'
+import ClubContentClient from '@/features/clubs/components/ClubContentClient'
+
 const page = () => {
   const dataMock = {
     "data": {
@@ -313,7 +314,7 @@ const page = () => {
   }
   return (
     <div className='container mx-auto px-4 py-8 text-black'>
-      <ClubContent data={dataMock} />
+      <ClubContentClient data={dataMock} />
     </div>
   )
 }
