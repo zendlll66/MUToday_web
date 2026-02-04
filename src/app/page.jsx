@@ -2,6 +2,10 @@
 import React from 'react'
 import PostCard from '@/features/feed/components/PostCard'
 import { useRouter } from 'next/navigation'
+import Banner from '@/components/ui/Banner'
+import SectionIcons from '@/components/ui/SectionIcons'
+
+
 
 const HomePage = () => {
     const router = useRouter()
@@ -321,11 +325,77 @@ const HomePage = () => {
         }
     }
 
+    const mockBannerData = {
+        "status": 200,
+        "success": true,
+        "message": "Success",
+        "data": [
+            {
+                "id": "1571366b-1f72-4277-9e8a-7c7413c2f916",
+                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/bannerBeforeBuy.webp",
+                "link": "https://stg-ticket-mutoday-frontend.mutoday.com/events/690acc16e043308f3d17a24f?a=1&token=019c1a87-050f-7d1e-96eb-4463d4642737"
+            },
+            {
+                "id": "9ef118e9-0ea9-4f1f-b5da-6f2d645ef52e",
+                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/bpBanner.webp",
+                "link": ""
+            },
+            {
+                "id": "6d7d99fa-9f07-41fa-aaaf-9b22a8ed26ce",
+                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/gundamBanner.jpg",
+                "link": ""
+            },
+            {
+                "id": "fd78e892-2728-4344-abab-6fb55968ed6e",
+                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/mhwBanner.jpg",
+                "link": ""
+            }
+        ]
+    }
+
+
+    const mockSectionIconsData = [
+        {
+            id: "1",
+            label: "ลัคนาราศี",
+            icon: "/icons/zodiac-icon.svg", // ต้องมี icon file
+            link: "/fortune/zodiac"
+        },
+        {
+            id: "2",
+            label: "ไพ่ทาโรต์",
+            icon: "/icons/tarot-icon.svg",
+            link: "/fortune/tarot"
+        },
+        {
+            id: "3",
+            label: "วอลเปเปอร์",
+            icon: "/icons/wallpaper-icon.svg",
+            link: "/wallpaper"
+        },
+        {
+            id: "4",
+            label: "สีเสื้อมงคล",
+            icon: "/icons/color-icon.svg",
+            link: "/fortune/color"
+        }
+    ]
+
     const handlePostDetail = (postId) => {
         router.push(`/post/${postId}`)
     }
     return (
         <>
+            <div className='w-full max-w-[810px] mx-auto mt-2'>
+                <Banner banners={mockBannerData.data} />
+            </div>
+            <div className='w-full max-w-[810px] mx-auto px-4 mt-6'>
+                <SectionIcons 
+                    title="ทำนาย"
+                    viewAllLink="/fortune"
+                    items={mockSectionIconsData}
+                />
+            </div>
             <div className='w-full max-w-[400px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
                 {mockFeedData.data.feed.data.posts.map((post, index) => (
                     <PostCard key={post.id} data={{ ...post, isFirstPost: index === 0 }} handlePostDetail={() => handlePostDetail(post.id)} />
