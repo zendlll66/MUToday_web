@@ -1,5 +1,6 @@
 import "./globals.css";
 import SideBar from "@/components/layout/SideBar";
+import TokenInit from "@/components/TokenInit";
 
 export const metadata = {
   title: "Mutoday - Spiritual Community",
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
@@ -17,10 +19,12 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://pub-84690884fe94462e83399faa03011cbe.r2.dev" />
       </head>
       <body className="antialiased">
-        <SideBar />
-        <main className="pt-14 md:pt-0 md:ml-16 lg:ml-64">
-        {children}
-        </main>
+        <TokenInit>
+          <SideBar />
+          <main className="pt-14 md:pt-0 md:ml-16 lg:ml-64">
+            {children}
+          </main>
+        </TokenInit>
       </body>
     </html>
   );

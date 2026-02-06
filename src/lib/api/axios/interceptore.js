@@ -18,7 +18,7 @@ const setupInterceptors = () => {
             return response;
         },
         (error) => {
-            if (error.response.status === 401) {
+            if (error && error.response && error.response.status === 401) {
                 Token.remove();
                 console.log("Unauthorized");
             }
