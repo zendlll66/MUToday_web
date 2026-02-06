@@ -5,7 +5,10 @@ import Token from "./token";
 const setupInterceptors = () => {
     axiosBase.interceptors.request.use(
         (config) => {
-            config.headers = createHeader();
+            config.headers = {
+                ...config.headers,
+                ...createHeader(),
+            };
             return config;
         },
         (error) => {
@@ -15,6 +18,9 @@ const setupInterceptors = () => {
 
     axiosBase.interceptors.response.use(
         (response) => {
+            if (response.data?.errors) {
+                return Promise.reject(response.data.errors);
+            }
             return response;
         },
         (error) => {

@@ -1,13 +1,15 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PostCard from '@/features/feed/components/PostCard'
 import { useRouter } from 'next/navigation'
 import Banner from '@/components/ui/Banner'
 import SectionIcons from '@/components/ui/SectionIcons'
+import FeedAPI from '@/lib/api/enpoints/feed.api'
 
 
 
 const HomePage = () => {
+    const [feedData, setFeedData] = useState(null)
     const router = useRouter()
     const mockFeedData = {
         "data": {
@@ -353,7 +355,6 @@ const HomePage = () => {
         ]
     }
 
-
     const mockSectionIconsData = [
         {
             id: "1",
@@ -384,20 +385,38 @@ const HomePage = () => {
     const handlePostDetail = (postId) => {
         router.push(`/post/${postId}`)
     }
+
+
+    useEffect(() => {
+        const fetchFeed = async () => {
+            try {
+                const response = await FeedAPI.getFeed()
+                console.log("response api", response)
+                setFeedData(response.data.feedPublicV2.data.posts || [])
+            } catch (error) {
+                const err = error.response
+                    ? {
+                        status: error.response.status,
+                        data: error.response.data,
+                        url: error.config?.url,
+                        method: error.config?.method,
+                    }
+                    : Array.isArray(error)
+                        ? { gqlErrors: error }
+                        : { message: error.message, code: error.code }
+                console.error("Feed API error:", err)
+            }
+        }
+        fetchFeed()
+    }, [])
+
     return (
         <>
             <div className='w-full max-w-[810px] mx-auto mt-2'>
                 <Banner banners={mockBannerData.data} />
             </div>
-            <div className='w-full max-w-[810px] mx-auto px-4 mt-6'>
-                <SectionIcons 
-                    title="ทำนาย"
-                    viewAllLink="/fortune"
-                    items={mockSectionIconsData}
-                />
-            </div>
             <div className='w-full max-w-[400px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
-                {mockFeedData.data.feed.data.posts.map((post, index) => (
+                {feedData?.map((post, index) => (
                     <PostCard key={post.id} data={{ ...post, isFirstPost: index === 0 }} handlePostDetail={() => handlePostDetail(post.id)} />
                 ))}
             </div>
