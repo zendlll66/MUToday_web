@@ -4,6 +4,7 @@ import Image from 'next/image'
 import PostHeader from '@/features/feed/components/PostHeader'
 import PostContent from '@/features/feed/components/PostContent'
 import PostActions from '@/features/feed/components/PostActions'
+import FooterCard from './FooterCard'
 
 const MasonryCard = ({ data }) => {
   if (!data) {
@@ -11,30 +12,30 @@ const MasonryCard = ({ data }) => {
   }
 
   return (
-    <article className='w-full bg-white rounded-lg overflow-hidden shadow-sm'>
+    <article className='w-full overflow-hidden  transition-shadow duration-200'>
       {/* Header */}
-      <div className='px-3 pt-3'>
+      {/* <div className='px-3 pt-3'>
         <PostHeader
           user={data.user}
           createdAt={data.createdAt}
           isOwner={data.isOwner}
         />
-      </div>
+      </div> */}
 
       {/* Media Section - Optimized for Masonry */}
       {data.typeImg && data.images && data.images.length > 0 ? (
         <div className='w-full'>
           {data.images.length === 1 ? (
-            <div className='relative w-full bg-gray-100'>
+            <div className='relative w-full [container-type:inline-size]'>
               <img
                 src={data.images[0].img || data.images[0].thumbnail}
                 alt='Post image'
-                className='w-full h-auto object-cover'
+                className='w-full h-auto max-h-[125cqw] rounded-lg sm:rounded-[20px] object-cover object-top'
                 loading='lazy'
               />
             </div>
           ) : (
-            <div className='grid grid-cols-2 gap-1'>
+            <div className='grid grid-cols-2 gap-0.5 sm:gap-1'>
               {data.images.slice(0, 4).map((image, index) => (
                 <div
                   key={image.id || index}
@@ -60,10 +61,9 @@ const MasonryCard = ({ data }) => {
         </div>
       ) : data.backgroundImage?.img ? (
         <div
-          className='w-full relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-4'
+          className='w-full aspect-square rounded-lg sm:rounded-[20px] overflow-hidden relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-2 sm:p-4'
           style={{
             backgroundImage: `url(${data.backgroundImage.img})`,
-            minHeight: '200px',
           }}
         >
           {data.postDetail && (
@@ -74,7 +74,7 @@ const MasonryCard = ({ data }) => {
                 color: data.backgroundImage.textColor || '#000000',
               }}
             >
-              <p className='text-sm font-medium leading-relaxed line-clamp-4'>
+              <p className='text-xs sm:text-sm font-medium leading-relaxed line-clamp-4'>
                 {data.postDetail}
               </p>
             </div>
@@ -83,22 +83,31 @@ const MasonryCard = ({ data }) => {
       ) : null}
 
       {/* Actions and Content */}
-      <div className='px-3 pb-3'>
-        <PostActions
+      <div className='px-2 sm:px-4 mt-2 sm:mt-3 pb-2 sm:pb-3'>
+        {/* <PostActions
           postId={data.id}
           liked={data.liked}
           countLike={data.countLike}
           countComment={data.countComment}
-        />
+        /> */}
 
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}
           user={data.user}
-          createdAt={data.createdAt}
           backgroundImage={data.backgroundImage}
+          compact
+        />
+        <FooterCard
+          user={data.user}
+          createdAt={data.createdAt}
+          isOwner={data.isOwner}
+          postId={data.id}
+          countLike={data.countLike}
+          countComment={data.countComment}
         />
       </div>
+
     </article>
   )
 }

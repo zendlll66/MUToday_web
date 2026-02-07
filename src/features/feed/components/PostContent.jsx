@@ -2,7 +2,7 @@
 import React from 'react'
 import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
-const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage }) => {
+const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, compact }) => {
     if (!postDetail && (!hashTag || hashTag.length === 0)) {
         return null
     }
@@ -29,22 +29,24 @@ const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage }) 
         <div className=' space-y-2' style={{ color: textColor }}>
             <div className='flex flex-row gap-2'>
                 {user?.displayName && (
-                    <div className='font-semibold text-sm mb-1' style={{ color: textColor }}>
+                    <div className={`font-semibold mb-1 ${compact ? 'text-xs sm:text-sm' : 'text-sm'}`} style={{ color: textColor }}>
                         {user.displayName}
                     </div>
                 )}
                 {postDetail && (
-                    <div className='text-sm leading-relaxed' style={{ color: textColor }}>
+                    <div className={`leading-relaxed line-clamp-2 ${compact ? 'text-xs sm:text-sm' : 'text-sm'}`} style={{ color: textColor }}>
                         {formatContentWithHashTags(postDetail)}
                     </div>
                 )}
             </div>
 
-            
 
-            <p className='text-[12px] font-medium mt-0.5' style={{ color: textColor }}>
-                {createdAt || 'ไม่ทราบเวลา'}
-            </p>
+            {createdAt && (
+                <p className='text-[12px] font-medium mt-0.5' style={{ color: textColor }}>
+                    {createdAt}
+                </p>
+            )}
+
         </div>
     )
 }

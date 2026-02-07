@@ -26,21 +26,6 @@ const PostActions = ({ postId, liked, countLike, countComment }) => {
     return (
         <div className='py-[17px]'>
             <div className='flex items-center gap-4 '>
-                {/* <button
-          onClick={handleLike}
-          className={`flex items-center gap-1.5 transition-colors ${
-            liked
-              ? 'text-mu-red hover:text-mu-red/80'
-              : 'text-gray-600 hover:text-mu-red'
-          }`}
-          aria-label='Like'
-        >
-         <Image src={'/icons/favourite.svg'} alt='favourite' width={24} height={24} />
-          <span className='text-sm font-medium'>
-            {countLike || '0'}
-          </span>
-        </button> */}
-
                 <button
                     onClick={handleLike}
                     className='flex items-center gap-1.5 text-gray-600 transition-colors cursor-pointer'

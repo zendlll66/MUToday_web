@@ -1,39 +1,34 @@
 "use client"
 import React from 'react'
-import { Masonry } from 'masonic'
 import MasonryCard from './MasonryCard'
 
 const PostCardMasonry = ({ data }) => {
-  // Extract posts from data structure
-  const posts = data?.data?.search?.data?.posts || []
+  // const posts = data?.data?.search?.data?.posts || []
 
+  const posts = data?.data?.feedPublicV2?.data?.posts || []
   if (!posts || posts.length === 0) {
     return (
-      <div className="w-full py-8 text-center text-gray-500">
-        ไม่พบข้อมูล
+      <div className="w-full py-16 text-center text-gray-500">
+        <p className="text-sm">ไม่พบข้อมูล</p>
       </div>
     )
   }
 
-  // Render function for Masonry
-  const renderCard = ({ index, data: post, width }) => {
-    return (
-      <div style={{ width }} className="mb-4">
-        <MasonryCard data={post} />
-      </div>
-    )
-  }
+  const leftColumn = posts.filter((_, i) => i % 2 === 0)
+  const rightColumn = posts.filter((_, i) => i % 2 === 1)
 
   return (
-    <div className=" mt-6 px-4">
-      <Masonry
-        items={posts}
-        render={renderCard}
-        columnGutter={16}
-        columnWidth={180}
-        minColumnWidth={250}
-        maxColumnWidth={400}
-      />
+    <div className="grid grid-cols-2 gap-2 sm:gap-4">
+      <div className="flex flex-col gap-2 sm:gap-4">
+        {leftColumn.map((post) => (
+          <MasonryCard key={post.id} data={post} />
+        ))}
+      </div>
+      <div className="flex flex-col gap-2 sm:gap-4">
+        {rightColumn.map((post) => (
+          <MasonryCard key={post.id} data={post} />
+        ))}
+      </div>
     </div>
   )
 }

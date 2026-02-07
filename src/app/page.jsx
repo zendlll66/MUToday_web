@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Banner from '@/components/ui/Banner'
 import SectionIcons from '@/components/ui/SectionIcons'
 import FeedAPI from '@/lib/api/enpoints/feed.api'
-
+import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 
 
 const HomePage = () => {
@@ -392,7 +392,8 @@ const HomePage = () => {
             try {
                 const response = await FeedAPI.getFeed()
                 console.log("response api", response)
-                setFeedData(response.data.feedPublicV2.data.posts || [])
+                // setFeedData(response.data.feedPublicV2.data.posts || [])
+                setFeedData(response || [])
             } catch (error) {
                 const err = error.response
                     ? {
@@ -415,10 +416,12 @@ const HomePage = () => {
             <div className='w-full max-w-[810px] mx-auto mt-2'>
                 <Banner banners={mockBannerData.data} />
             </div>
-            <div className='w-full max-w-[400px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
-                {feedData?.map((post, index) => (
+            <div className='w-full max-w-[300px] md:max-w-[800px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
+                {/* {feedData?.map((post, index) => (
                     <PostCard key={post.id} data={{ ...post, isFirstPost: index === 0 }} handlePostDetail={() => handlePostDetail(post.id)} />
-                ))}
+                ))} */}
+                {/* <div className='text-black'>{JSON.stringify(feedData)}</div> */}
+                <ClubContentClient data={feedData} />
             </div>
         </>
     )

@@ -1,6 +1,11 @@
 import React from 'react'
 import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 
+export const metadata = {
+  title: 'คลับสายมู | Mutoday - ชุมชนสายมู',
+  description: 'ชุมชนสายมู แชร์โพสต์ ทำนาย ดวง ฮวงจุ้ย และความเชื่อ',
+}
+
 const page = () => {
   const dataMock = {
     "data": {
@@ -313,7 +318,7 @@ const page = () => {
     }
   }
   return (
-    <div className='container mx-auto px-4 py-8 text-black'>
+    <div className='w-full max-w-[810px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 text-black min-h-screen bg-gray-50/50'>
       <ClubContentClient data={dataMock} />
     </div>
   )
