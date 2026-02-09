@@ -3,10 +3,17 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
+import ShareBottomSheet from '@/components/ui/ShareBottomSheet'
 
 const SideBar = () => {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isShareSheetOpen, setIsShareSheetOpen] = useState(false)
+
+  const openShareSheet = () => {
+    setIsShareSheetOpen(true)
+    setIsMobileMenuOpen(false)
+  }
 
   const menuItems = [
     {
@@ -32,7 +39,8 @@ const SideBar = () => {
     {
       label: 'แชร์เว็บไซต์นี้',
       href: '/share',
-      icon: '/icons/share-04.svg'
+      icon: '/icons/share-04.svg',
+      isShare: true
     }
   ]
 
@@ -54,7 +62,25 @@ const SideBar = () => {
         {/* Navigation Menu - Icon Only */}
         <nav className="flex flex-col items-center w-full">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = !item.isShare && pathname === item.href
+            if (item.isShare) {
+              return (
+                <button
+                  key={item.href}
+                  onClick={openShareSheet}
+                  className="flex items-center justify-center w-12 h-12 rounded-lg mb-1 transition-colors text-gray-700 hover:bg-gray-50"
+                  title={item.label}
+                >
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className="w-5 h-5 opacity-60"
+                  />
+                </button>
+              )
+            }
             return (
               <Link
                 key={item.href}
@@ -96,7 +122,25 @@ const SideBar = () => {
         {/* Navigation Menu */}
         <nav className="px-4 pb-4">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = !item.isShare && pathname === item.href
+            if (item.isShare) {
+              return (
+                <button
+                  key={item.href}
+                  onClick={openShareSheet}
+                  className="flex items-center gap-3 px-4 py-3 rounded-[50px] mb-1 transition-colors text-gray-700 hover:bg-gray-50 w-full text-left"
+                >
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className="w-5 h-5 opacity-60"
+                  />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </button>
+              )
+            }
             return (
               <Link
                 key={item.href}
@@ -207,13 +251,13 @@ const SideBar = () => {
         </div>
 
         {/* Share Button */}
-        <Link
-          href="/share"
+        <button
+          onClick={() => setIsShareSheetOpen(true)}
           className="p-2 -mr-2"
           aria-label="Share"
         >
-         <Image src="/icons/share-04.svg" alt="Share" width={30} height={30} />
-        </Link>
+          <Image src="/icons/share-04.svg" alt="Share" width={30} height={30} />
+        </button>
       </header>
 
       {/* Mobile Overlay */}
@@ -255,7 +299,25 @@ const SideBar = () => {
         {/* Navigation Menu */}
         <nav className="px-6 pb-[50px]">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = !item.isShare && pathname === item.href
+            if (item.isShare) {
+              return (
+                <button
+                  key={item.href}
+                  onClick={openShareSheet}
+                  className="flex items-center gap-3 px-4 py-3 rounded-[50px] mb-1 transition-colors text-gray-700 hover:bg-gray-50 w-full text-left"
+                >
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className="w-5 h-5 opacity-60"
+                  />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </button>
+              )
+            }
             return (
               <Link
                 key={item.href}
@@ -283,6 +345,8 @@ const SideBar = () => {
           <button className="w-full bg-mu-text cursor-pointer text-white py-3 rounded-[50px] text-sm font-medium">ดาวน์โหลดแอป</button>
         </div>
       </aside>
+
+      <ShareBottomSheet isOpen={isShareSheetOpen} onClose={() => setIsShareSheetOpen(false)} />
     </>
   )
 }

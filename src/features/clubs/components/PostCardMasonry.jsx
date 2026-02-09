@@ -18,13 +18,13 @@ const PostCardMasonry = ({ data, onPostClick }) => {
   const rightColumn = posts.filter((_, i) => i % 2 === 1)
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-4">
-      <div className="flex flex-col gap-2 sm:gap-4">
+    <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6">
+      <div className="flex flex-col gap-2 sm:gap-4 md:gap-6">
         {leftColumn.map((post) => (
           <MasonryCard key={post.id} data={post} onPostClick={onPostClick} />
         ))}
       </div>
-      <div className="flex flex-col gap-2 sm:gap-4">
+      <div className="flex flex-col gap-2 sm:gap-4 md:gap-6">
         {rightColumn.map((post) => (
           <MasonryCard key={post.id} data={post} onPostClick={onPostClick} />
         ))}

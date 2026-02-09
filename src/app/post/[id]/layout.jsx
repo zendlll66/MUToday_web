@@ -22,13 +22,29 @@ export async function generateMetadata({ params }) {
             const description = post.postDetail
                 ? (post.postDetail || '').slice(0, 160)
                 : `โพสต์จาก ${post.user?.displayName || 'Mutoday'} ในชุมชน Mutoday`
+            const ogImage = post.images?.[0]?.img || post.backgroundImage?.img || 'https://mutoday.com/icons/logo01.svg'
+            const ogUrl = `https://mutoday.com/post/${id}`
             return {
                 title,
                 description,
                 openGraph: {
                     title,
                     description,
-                    images: post.images?.[0]?.img ? [post.images[0].img] : undefined,
+                    url: ogUrl,
+                    type: 'article',
+                    images: [
+                        {
+                            url: ogImage,
+                            width: 1200,
+                            height: 630,
+                            alt: title,
+                        },
+                    ],
+                },
+                twitter: {
+                    card: 'summary_large_image',
+                    title,
+                    description,
                 },
             }
         }

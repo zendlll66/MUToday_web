@@ -39,12 +39,12 @@ const MasonryCard = ({ data, onPostClick }) => {
               <img
                 src={data.images[0].img || data.images[0].thumbnail}
                 alt='Post image'
-                className='w-full h-auto max-h-[125cqw] rounded-lg sm:rounded-[20px] object-cover object-top'
+                className='w-full h-auto max-h-[125cqw] sm:max-h-[140cqw] md:max-h-[160cqw] rounded-lg sm:rounded-[20px] md:rounded-[24px] object-cover object-top'
                 loading='lazy'
               />
             </div>
           ) : (
-            <div className='grid grid-cols-2 gap-0.5 sm:gap-1'>
+            <div className='grid grid-cols-2 gap-0.5 sm:gap-1 md:gap-2'>
               {data.images.slice(0, 4).map((image, index) => (
                 <div
                   key={image.id || index}
@@ -58,7 +58,7 @@ const MasonryCard = ({ data, onPostClick }) => {
                   />
                   {index === 3 && data.images.length > 4 && (
                     <div className='absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none'>
-                      <span className='text-white font-medium text-xs'>
+                      <span className='text-white font-medium text-xs sm:text-sm'>
                         +{data.images.length - 4}
                       </span>
                     </div>
@@ -70,7 +70,7 @@ const MasonryCard = ({ data, onPostClick }) => {
         </div>
       ) : data.backgroundImage?.img ? (
         <div
-          className='w-full aspect-square rounded-lg sm:rounded-[20px] overflow-hidden relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-2 sm:p-4'
+          className='w-full aspect-square rounded-lg sm:rounded-[20px] md:rounded-[24px] overflow-hidden relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-2 sm:p-4 md:p-6'
           style={{
             backgroundImage: `url(${data.backgroundImage.img})`,
           }}
@@ -83,21 +83,21 @@ const MasonryCard = ({ data, onPostClick }) => {
                 color: data.backgroundImage.textColor || '#000000',
               }}
             >
-              <p className='text-xs sm:text-sm font-medium leading-relaxed line-clamp-4'>
+              <p className='text-xs sm:text-sm md:text-base font-medium leading-relaxed line-clamp-4'>
                 {data.postDetail}
               </p>
             </div>
           )}
         </div>
       ) : (
-        <div className='w-full aspect-[4/5] min-h-[200px] rounded-lg sm:rounded-[20px] animate-shimmer flex items-center justify-center'>
+        <div className='w-full aspect-[4/5] min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center'>
           <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
         </div>
       )
       }
 
       {/* Actions and Content */}
-      <div className='px-2 sm:px-4 mt-2 sm:mt-3 pb-2 sm:pb-3'>
+      <div className='px-2 sm:px-4 md:px-6 mt-2 sm:mt-3 md:mt-4 pb-2 sm:pb-3 md:pb-4'>
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}

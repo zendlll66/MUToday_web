@@ -443,7 +443,7 @@ const HomePage = () => {
             <div className='w-full max-w-[810px] mx-auto mt-2'>
                 <Banner banners={mockBannerData.data} />
             </div>
-            <div className='w-full max-w-[300px] md:max-w-[800px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
+            <div className='w-full max-w-[300px] sm:max-w-[600px] md:max-w-[800px] min-w-[450px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
                 <ClubContentClient data={feedData} onPostClick={handlePostDetail} />
                 {feedData?.data?.feedPublicV2?.data?.meta?.hasNextPage && (
                     <div ref={loadMoreRef} className='w-full py-4 flex justify-center'>

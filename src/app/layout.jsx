@@ -3,8 +3,29 @@ import SideBar from "@/components/layout/SideBar";
 import TokenInit from "@/components/TokenInit";
 
 export const metadata = {
+  metadataBase: new URL('https://mutoday.com'),
   title: "Mutoday - Spiritual Community",
-  description: "Mutoday - A spiritual community for fortune telling, astrology, tarot, and spiritual content",
+  description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์ A spiritual community for fortune telling, astrology, tarot, and spiritual content",
+  openGraph: {
+    title: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์",
+    description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์ A spiritual community for fortune telling, astrology, tarot, and spiritual content",
+    siteName: 'Mutoday',
+    images: [
+      {
+        url: '/icons/logo01.svg',
+        width: 122,
+        height: 41,
+        alt: 'Mutoday Logo',
+      },
+    ],
+    locale: 'th_TH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์",
+    description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์",
+  },
   other: {
     'dns-prefetch': 'https://pub-84690884fe94462e83399faa03011cbe.r2.dev',
   },
