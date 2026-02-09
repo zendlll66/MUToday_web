@@ -1,10 +1,8 @@
 "use client"
 import React from 'react'
-import Image from 'next/image'
-import PostHeader from '@/features/feed/components/PostHeader'
 import PostContent from '@/features/feed/components/PostContent'
-import PostActions from '@/features/feed/components/PostActions'
 import FooterCard from './FooterCard'
+import PostHeader from '@/features/feed/components/PostHeader'
 
 const MasonryCard = ({ data }) => {
   if (!data) {
@@ -14,13 +12,7 @@ const MasonryCard = ({ data }) => {
   return (
     <article className='w-full overflow-hidden  transition-shadow duration-200'>
       {/* Header */}
-      {/* <div className='px-3 pt-3'>
-        <PostHeader
-          user={data.user}
-          createdAt={data.createdAt}
-          isOwner={data.isOwner}
-        />
-      </div> */}
+
 
       {/* Media Section - Optimized for Masonry */}
       {data.typeImg && data.images && data.images.length > 0 ? (
@@ -80,17 +72,15 @@ const MasonryCard = ({ data }) => {
             </div>
           )}
         </div>
-      ) : null}
+      ) : (
+        <div className='w-full aspect-[4/5] min-h-[200px] rounded-lg sm:rounded-[20px] animate-shimmer flex items-center justify-center'>
+          <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
+        </div>
+      )
+      }
 
       {/* Actions and Content */}
       <div className='px-2 sm:px-4 mt-2 sm:mt-3 pb-2 sm:pb-3'>
-        {/* <PostActions
-          postId={data.id}
-          liked={data.liked}
-          countLike={data.countLike}
-          countComment={data.countComment}
-        /> */}
-
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}
