@@ -7,8 +7,8 @@ const ClubContent = dynamic(
     { ssr: false }
 )
 
-const ClubContentClient = (props) => {
-    return <ClubContent {...props} />
+const ClubContentClient = ({ onPostClick, ...props }) => {
+    return <ClubContent {...props} onPostClick={onPostClick} />
 }
 
 export default ClubContentClient

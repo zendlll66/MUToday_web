@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import PostCard from '@/features/feed/components/PostCard'
 import { useRouter } from 'next/navigation'
 import Banner from '@/components/ui/Banner'
@@ -7,9 +7,12 @@ import SectionIcons from '@/components/ui/SectionIcons'
 import FeedAPI from '@/lib/api/enpoints/feed.api'
 import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 
-
 const HomePage = () => {
     const [feedData, setFeedData] = useState(null)
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [page, setPage] = useState(1)
+    const loadMoreRef = useRef(null)
+    const loadingMoreRef = useRef(false)
     const router = useRouter()
     const mockFeedData = {
         "data": {
@@ -355,45 +358,54 @@ const HomePage = () => {
         ]
     }
 
-    const mockSectionIconsData = [
-        {
-            id: "1",
-            label: "ลัคนาราศี",
-            icon: "/icons/zodiac-icon.svg", // ต้องมี icon file
-            link: "/fortune/zodiac"
-        },
-        {
-            id: "2",
-            label: "ไพ่ทาโรต์",
-            icon: "/icons/tarot-icon.svg",
-            link: "/fortune/tarot"
-        },
-        {
-            id: "3",
-            label: "วอลเปเปอร์",
-            icon: "/icons/wallpaper-icon.svg",
-            link: "/wallpaper"
-        },
-        {
-            id: "4",
-            label: "สีเสื้อมงคล",
-            icon: "/icons/color-icon.svg",
-            link: "/fortune/color"
-        }
-    ]
-
     const handlePostDetail = (postId) => {
         router.push(`/post/${postId}`)
     }
 
+    const loadMore = useCallback(async () => {
+        const meta = feedData?.data?.feedPublicV2?.data?.meta
+        const hasNextPage = meta?.hasNextPage
+        const nextCursor = meta?.nextCursor
+        if (!hasNextPage || loadingMoreRef.current) return
+
+        loadingMoreRef.current = true
+        setLoadingMore(true)
+        try {
+            const nextPage = page + 1
+            const response = await FeedAPI.getFeed({
+                page: nextPage,
+                cursor: nextCursor || new Date().toISOString(),
+            })
+            const newPosts = response?.data?.feedPublicV2?.data?.posts || []
+            const newMeta = response?.data?.feedPublicV2?.data?.meta
+            const prevPosts = feedData?.data?.feedPublicV2?.data?.posts || []
+            const prevIds = new Set(prevPosts.map((p) => p.id))
+            const uniqueNewPosts = newPosts.filter((p) => !prevIds.has(p.id))
+
+            setFeedData({
+                data: {
+                    feedPublicV2: {
+                        data: {
+                            posts: [...prevPosts, ...uniqueNewPosts],
+                            meta: newMeta,
+                        },
+                    },
+                },
+            })
+            setPage(nextPage)
+        } catch (error) {
+            console.error("Feed load more error:", error)
+        } finally {
+            loadingMoreRef.current = false
+            setLoadingMore(false)
+        }
+    }, [feedData, page])
 
     useEffect(() => {
         const fetchFeed = async () => {
             try {
                 const response = await FeedAPI.getFeed()
-                console.log("response api", response)
-                // setFeedData(response.data.feedPublicV2.data.posts || [])
-                setFeedData(response || [])
+                setFeedData(response || null)
             } catch (error) {
                 const err = error.response
                     ? {
@@ -411,17 +423,33 @@ const HomePage = () => {
         fetchFeed()
     }, [])
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries
+                if (entry?.isIntersecting) {
+                    loadMore()
+                }
+            },
+            { rootMargin: '200px', threshold: 0 }
+        )
+        const el = loadMoreRef.current
+        if (el) observer.observe(el)
+        return () => (el ? observer.unobserve(el) : undefined)
+    }, [loadMore])
+
     return (
         <>
             <div className='w-full max-w-[810px] mx-auto mt-2'>
                 <Banner banners={mockBannerData.data} />
             </div>
             <div className='w-full max-w-[300px] md:max-w-[800px] min-w-[300px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
-                {/* {feedData?.map((post, index) => (
-                    <PostCard key={post.id} data={{ ...post, isFirstPost: index === 0 }} handlePostDetail={() => handlePostDetail(post.id)} />
-                ))} */}
-                {/* <div className='text-black'>{JSON.stringify(feedData)}</div> */}
-                <ClubContentClient data={feedData} />
+                <ClubContentClient data={feedData} onPostClick={handlePostDetail} />
+                {feedData?.data?.feedPublicV2?.data?.meta?.hasNextPage && (
+                    <div ref={loadMoreRef} className='w-full py-4 flex justify-center'>
+                        {loadingMore && <p className='text-gray-500 text-sm'>กำลังโหลด...</p>}
+                    </div>
+                )}
             </div>
         </>
     )

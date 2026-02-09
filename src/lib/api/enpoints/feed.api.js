@@ -1,58 +1,57 @@
 import gql from "../gql";
 
-const FEED_QUERY = `
-  query {
-  feedPublicV2(input: { limit: 10, cursor: "2026-02-04T07:12:09.371Z", page: 4 }) {
-    data {
-      posts {
-        id
-        isOwner
-        typeImg
-        postDetail
-        createdAt
-        countLike
-        countComment
-        hashTag
-        address
-        lat
-        lng
-        liked
-        images {
-          id
-          img
-          thumbnail
-        }
-        backgroundImage {
-          img
-          textColor
-        }
-        user {
-          id
-          displayName
-          imgProfile
-        }
-      }
-      meta {
-        limit
-        nextCursor
-        hasNextPage
-      }
+const FEED_FIELDS = `
+  posts {
+    id
+    isOwner
+    typeImg
+    postDetail
+    createdAt
+    countLike
+    countComment
+    hashTag
+    address
+    lat
+    lng
+    liked
+    images {
+      id
+      img
+      thumbnail
+    }
+    backgroundImage {
+      img
+      textColor
+    }
+    user {
+      id
+      displayName
+      imgProfile
     }
   }
-}
-
+  meta {
+    limit
+    nextCursor
+    hasNextPage
+  }
 `;
 
 const FeedAPI = {
     getFeed: async (variables = {}) => {
-        const input = {
-            limit: variables.limit ?? 10,
-            page: variables.page ?? 1,
-        };
-        if (variables.cursor) {
-            input.cursor = variables.cursor;
-        }
-        return gql(FEED_QUERY, { input });
+        const limit = variables.limit ?? 10
+        const page = variables.page ?? 1
+        const cursor = variables.cursor ?? new Date().toISOString()
+
+        const query = `
+          query {
+            feedPublicV2(input: { limit: ${limit}, cursor: "${cursor}", page: ${page} }) {
+              data {
+                ${FEED_FIELDS}
+              }
+            }
+          }
+        `
+        return gql(query, {})
     },
 };
 

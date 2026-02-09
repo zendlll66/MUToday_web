@@ -2,7 +2,7 @@ import React from 'react'
 import SearchBar from '@/components/ui/SearchBar'
 import PostCardMasonry from './PostCardMasonry'
 
-const ClubContent = ({ data }) => {
+const ClubContent = ({ data, onPostClick }) => {
   return (
     <div className='w-full mx-auto '>
       <header className='mb-6 sm:mb-8'>
@@ -14,7 +14,7 @@ const ClubContent = ({ data }) => {
           className='max-w-md'
         /> */}
       </header>
-      <PostCardMasonry data={data} />
+      <PostCardMasonry data={data} onPostClick={onPostClick} />
     </div>
   )
 }

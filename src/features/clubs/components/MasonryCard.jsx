@@ -4,13 +4,30 @@ import PostContent from '@/features/feed/components/PostContent'
 import FooterCard from './FooterCard'
 import PostHeader from '@/features/feed/components/PostHeader'
 
-const MasonryCard = ({ data }) => {
+const MasonryCard = ({ data, onPostClick }) => {
   if (!data) {
     return null
   }
 
+  const handleCardClick = () => {
+    if (onPostClick) {
+      onPostClick(data.id)
+    }
+  }
+
   return (
-    <article className='w-full overflow-hidden  transition-shadow duration-200'>
+    <article
+      className='w-full overflow-hidden transition-shadow duration-200 cursor-pointer'
+      onClick={handleCardClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleCardClick()
+        }
+      }}
+      role='button'
+      tabIndex={0}
+    >
       {/* Header */}
 
 
@@ -87,6 +104,7 @@ const MasonryCard = ({ data }) => {
           user={data.user}
           backgroundImage={data.backgroundImage}
           compact
+          feed={true}
         />
         <FooterCard
           user={data.user}
