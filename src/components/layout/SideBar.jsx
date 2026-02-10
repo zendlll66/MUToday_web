@@ -15,6 +15,24 @@ const SideBar = () => {
     setIsMobileMenuOpen(false)
   }
 
+  const APP_STORE_URL = 'https://apps.apple.com/th/app/mutoday-astrology/id6475958471'
+  const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.sevensolutions.mutoday&pli=1'
+  const WEB_URL = 'https://mutoday.com'
+
+  const handleDownloadApp = () => {
+    if (typeof window === 'undefined') return
+    const ua = navigator.userAgent || navigator.vendor || window.opera || ''
+    if (/android/i.test(ua)) {
+      window.location.href = PLAY_STORE_URL
+    } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+      window.location.href = APP_STORE_URL
+    } else if (/Macintosh|Mac OS X/i.test(ua)) {
+      window.location.href = WEB_URL
+    } else {
+      window.location.href = WEB_URL
+    }
+  }
+
   const menuItems = [
     {
       label: 'หน้าแรก',
@@ -341,8 +359,14 @@ const SideBar = () => {
           })}
         </nav>
 
-        <div className="px-6 pb-4"> 
-          <button className="w-full bg-mu-text cursor-pointer text-white py-3 rounded-[50px] text-sm font-medium">ดาวน์โหลดแอป</button>
+        <div className="px-6 pb-4">
+          <button
+            type="button"
+            onClick={handleDownloadApp}
+            className="w-full bg-mu-text cursor-pointer text-white py-3 rounded-[50px] text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            ดาวน์โหลดแอป
+          </button>
         </div>
       </aside>
 
