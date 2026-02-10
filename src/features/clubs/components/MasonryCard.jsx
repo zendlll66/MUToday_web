@@ -55,7 +55,7 @@ const MasonryCard = ({ data, onPostClick }) => {
 
   return (
     <article
-      className='w-full overflow-hidden transition-shadow duration-200 cursor-pointer'
+      className='w-full min-w-0 overflow-hidden transition-shadow duration-200 cursor-pointer'
       onClick={handleCardClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -71,7 +71,7 @@ const MasonryCard = ({ data, onPostClick }) => {
 
       {/* Media Section - Optimized for Masonry */}
       {data.typeImg && data.images && data.images.length > 0 ? (
-        <div className='w-full'>
+        <div className='w-full min-w-0'>
           {data.images.length === 1 ? (
             (() => {
               const src = data.images[0].img || data.images[0].thumbnail
@@ -79,7 +79,7 @@ const MasonryCard = ({ data, onPostClick }) => {
                 return PLACEHOLDER_SINGLE
               }
               return (
-                <div className='relative w-full [container-type:inline-size]'>
+                <div className='relative w-full min-w-0 [container-type:inline-size]'>
                   <img
                     src={src}
                     alt='Post image'
@@ -91,7 +91,7 @@ const MasonryCard = ({ data, onPostClick }) => {
               )
             })()
           ) : (
-            <div className='grid grid-cols-2 gap-0.5 sm:gap-1 md:gap-2'>
+            <div className='grid grid-cols-2 gap-0.5 sm:gap-1 md:gap-2 min-w-0'>
               {data.images.slice(0, 4).map((image, index) => {
                 const src = image.thumbnail || image.img
                 const hasError = failedGridIndices[index]
@@ -99,7 +99,7 @@ const MasonryCard = ({ data, onPostClick }) => {
                 return (
                 <div
                   key={image.id || index}
-                  className='relative bg-gray-100 aspect-square'
+                  className='relative min-w-0 bg-gray-100 aspect-square overflow-hidden'
                 >
                   {showPlaceholder ? (
                     PLACEHOLDER_CELL
@@ -127,7 +127,7 @@ const MasonryCard = ({ data, onPostClick }) => {
         </div>
       ) : data.backgroundImage?.img ? (
         <div
-          className='w-full aspect-square rounded-lg sm:rounded-[20px] md:rounded-[24px] overflow-hidden relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-2 sm:p-4 md:p-6'
+          className='w-full min-w-0 aspect-square rounded-lg sm:rounded-[20px] md:rounded-[24px] overflow-hidden relative bg-cover bg-center bg-no-repeat flex items-center justify-center p-2 sm:p-4 md:p-6'
           style={{
             backgroundImage: `url(${data.backgroundImage.img})`,
           }}
@@ -154,7 +154,7 @@ const MasonryCard = ({ data, onPostClick }) => {
       }
 
       {/* Actions and Content */}
-      <div className='px-2 sm:px-4 md:px-6 lg:mt-[10px] mt-[5px] pb-2 sm:pb-3 md:pb-4'>
+      <div className='min-w-0 px-1.5 sm:px-4 md:px-6 lg:mt-[10px] mt-[5px] pb-2 sm:pb-3 md:pb-4'>
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}

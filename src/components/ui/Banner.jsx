@@ -12,7 +12,7 @@ const Banner = ({
     autoPlayInterval = 5000,
     showDots = true,
     className = '',
-    aspectRatio = 'aspect-[9/3]'
+    aspectRatio = 'aspect-[9/3] sm:aspect-[9/3]'
 }) => {
     const plugin = useRef(
         Autoplay({ delay: autoPlayInterval, stopOnInteraction: true })
@@ -29,7 +29,7 @@ const Banner = ({
     if (banners.length === 1) {
         const banner = banners[0]
         return (
-            <div className={cn('w-full max-w-[810px] mt-2 mx-auto flex justify-center items-center', aspectRatio, 'relative overflow-hidden rounded-lg', className)}>
+            <div className={cn('w-full min-w-0 max-w-[810px] mt-2 mx-auto flex justify-center items-center', aspectRatio, 'relative overflow-hidden rounded-lg sm:rounded-xl', className)}>
                 {banner.link ? (
                     <button
                         onClick={() => handleBannerClick(banner.link)}
@@ -67,7 +67,7 @@ const Banner = ({
         <Carousel
             opts={{ loop: true }}
             plugins={autoPlay ? [plugin.current] : []}
-            className={cn('relative w-full max-w-[810px] mt-2', aspectRatio, 'overflow-hidden rounded-lg', className)}
+            className={cn('relative w-full min-w-0 max-w-[810px] mt-2', aspectRatio, 'overflow-hidden rounded-lg sm:rounded-xl', className)}
             {...(autoPlay && {
                 onMouseEnter: () => plugin.current?.stop(),
                 onMouseLeave: () => plugin.current?.reset()
@@ -87,7 +87,7 @@ const Banner = ({
                                         src={banner.img}
                                         alt={`Banner ${banner.id}`}
                                         fill
-                                        className="object-cover rounded-3xl overflow-hidden "
+                                        className="object-cover rounded-lg sm:rounded-xl overflow-hidden"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                                         priority={index === 0}
                                         draggable={false}
@@ -99,7 +99,7 @@ const Banner = ({
                                         src={banner.img}
                                         alt={`Banner ${banner.id}`}
                                         fill
-                                        className="object-cover rounded-3xl overflow-hidden "
+                                        className="object-cover rounded-lg sm:rounded-xl overflow-hidden"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                                         priority={index === 0}
                                         draggable={false}

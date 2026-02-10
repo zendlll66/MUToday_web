@@ -141,10 +141,10 @@ const HomePage = () => {
 
     return (
         <>
-            <div className='w-full max-w-[810px] mx-auto mt-2'>
+            <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6'>
                 <Banner banners={mockBannerData.data} />
             </div>
-            <div className='w-full max-w-[300px] sm:max-w-[600px] md:max-w-[800px] min-w-[450px] mx-auto min-h-screen flex flex-col items-center py-4 cursor-pointer'>
+            <div className='w-full min-w-0 max-w-[810px] sm:max-w-[600px] md:max-w-[800px] mx-auto min-h-screen flex flex-col items-center py-4 px-4 sm:px-6 cursor-pointer'>
                 <ClubContentClient data={feedData} onPostClick={handlePostDetail} loading={loading && !feedData} />
                 {feedData?.data?.feedPublicV2?.data?.meta?.hasNextPage && (
                     <div ref={loadMoreRef} className='w-full py-4 flex justify-center'>

@@ -9,7 +9,7 @@ import React from 'react'
  */
 const MasonryCardSkeleton = () => {
   return (
-    <article className='w-full overflow-hidden rounded-lg sm:rounded-[20px] md:rounded-[24px]'>
+    <article className='w-full min-w-0 overflow-hidden rounded-lg sm:rounded-[20px] md:rounded-[24px]'>
       {/* Media block - matches card image area */}
       <div className='w-full aspect-[4/5] min-h-[120px] rounded-lg sm:rounded-[20px] md:rounded-[24px] bg-gray-200 animate-shimmer' />
       {/* Content block - 2 lines like PostContent */}
