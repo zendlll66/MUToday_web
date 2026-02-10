@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
-import { X } from 'lucide-react'
+import { X, Share2 } from 'lucide-react'
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -29,12 +29,17 @@ const FB_APP_ID = process.env.NEXT_PUBLIC_FB_APP_ID || '87741124305'
 
 const getShareUrl = () => (typeof window !== 'undefined' ? window.location.href : DEFAULT_SHARE_URL)
 
+const isMobile = () =>
+  typeof navigator !== 'undefined' &&
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
 const shareOptions = [
   {
     id: 'line',
     label: 'LINE',
     icon: '/social_icon/line.svg',
     getUrl: () => `https://line.me/R/msg/text/?${encodeURIComponent(DEFAULT_SHARE_TEXT + '\n' + getShareUrl())}`,
+    getAppUrl: () => `line://msg/text/${encodeURIComponent(DEFAULT_SHARE_TEXT + '\n' + getShareUrl())}`,
   },
   {
     id: 'messenger',
@@ -42,6 +47,7 @@ const shareOptions = [
     icon: '/social_icon/message.svg',
     getUrl: () =>
       `https://www.facebook.com/dialog/send?app_id=${FB_APP_ID}&link=${encodeURIComponent(DEFAULT_SHARE_URL)}&redirect_uri=${encodeURIComponent(DEFAULT_SHARE_URL)}`,
+    getAppUrl: () => `fb-messenger://share?link=${encodeURIComponent(DEFAULT_SHARE_URL)}`,
   },
   {
     id: 'facebook',
@@ -49,6 +55,7 @@ const shareOptions = [
     icon: '/social_icon/facebook.svg',
     getUrl: () =>
       `https://www.facebook.com/share_channel/?type=reshare&link=${encodeURIComponent(DEFAULT_SHARE_URL)}&app_id=${FB_APP_ID}&source_surface=external_reshare&display=popup&hashtag#`,
+    getAppUrl: () => `fb://facewebmodal/f?href=${encodeURIComponent('https://www.facebook.com/share_channel/?type=reshare&link=' + DEFAULT_SHARE_URL + '&app_id=' + FB_APP_ID)}`,
   },
   {
     id: 'instagram',
@@ -56,12 +63,14 @@ const shareOptions = [
     icon: '/social_icon/instagram.svg',
     action: 'copyAndOpen',
     copyAndOpenUrl: 'https://www.instagram.com/',
+    copyAndOpenAppUrl: 'instagram://app',
   },
   {
     id: 'whatsapp',
     label: 'WhatsApp',
     icon: '/social_icon/weChat.svg',
     getUrl: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
+    getAppUrl: () => `whatsapp://send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
   },
   {
     id: 'tiktok',
@@ -69,11 +78,13 @@ const shareOptions = [
     icon: '/social_icon/tiktok.svg',
     action: 'copyAndOpen',
     copyAndOpenUrl: 'https://www.tiktok.com/',
+    copyAndOpenAppUrl: 'tiktok://',
   },
 ]
 
 const ShareBottomSheet = ({ isOpen, onClose }) => {
   const dragControls = useDragControls()
+  const canNativeShare = typeof navigator !== 'undefined' && !!navigator.share
 
   useEffect(() => {
     if (isOpen) {
@@ -86,11 +97,32 @@ const ShareBottomSheet = ({ isOpen, onClose }) => {
     }
   }, [isOpen])
 
+  const handleNativeShare = async () => {
+    try {
+      await navigator.share({
+        title: DEFAULT_SHARE_TEXT,
+        text: DEFAULT_SHARE_TEXT,
+        url: getShareUrl(),
+      })
+      onClose()
+    } catch (err) {
+      if (err?.name !== 'AbortError') {
+        console.error('Native share failed:', err)
+      }
+    }
+  }
+
   const handleShare = async (option) => {
+    const mobile = isMobile()
+
     if (option.action === 'copyAndOpen') {
       try {
         await navigator.clipboard.writeText(getShareUrl())
-        window.open(option.copyAndOpenUrl, '_blank', 'noopener,noreferrer')
+        if (mobile && option.copyAndOpenAppUrl) {
+          window.location.href = option.copyAndOpenAppUrl
+        } else {
+          window.open(option.copyAndOpenUrl, '_blank', 'noopener,noreferrer')
+        }
         onClose()
       } catch (err) {
         console.error('Copy failed:', err)
@@ -98,8 +130,12 @@ const ShareBottomSheet = ({ isOpen, onClose }) => {
       return
     }
 
-    const url = option.getUrl()
-    window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400')
+    const url = mobile && option.getAppUrl ? option.getAppUrl() : option.getUrl()
+    if (mobile && option.getAppUrl) {
+      window.location.href = url
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400')
+    }
     onClose()
   }
 
@@ -167,6 +203,20 @@ const ShareBottomSheet = ({ isOpen, onClose }) => {
 
           {/* Share Options - Single Row */}
           <div className="flex flex-nowrap gap-6 overflow-x-auto px-2 pb-2 scrollbar-hide">
+            {canNativeShare && (
+              <button
+                type="button"
+                onClick={handleNativeShare}
+                className="flex flex-col items-center gap-2 py-2 shrink-0 min-w-[72px] hover:opacity-80 transition-opacity active:scale-95"
+              >
+                <div className="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden bg-gray-50 p-2">
+                  <Share2 className="w-8 h-8 text-gray-600" />
+                </div>
+                <span className="text-xs font-medium text-gray-700 text-center">
+                  แชร์ผ่านแอป
+                </span>
+              </button>
+            )}
             {shareOptions.map((option) => (
               <button
                 key={option.id}
