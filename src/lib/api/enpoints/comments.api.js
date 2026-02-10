@@ -41,11 +41,15 @@ const META_FIELDS = `
 `
 
 const CommentsAPI = {
-  getCommentsByPostId: (postId, variables = {}) => {
+  getCommentsByPostId: (postId, { limit = 10, cursor = '' } = {}) => {
     const safePostId = String(postId || '').replace(/"/g, '\\"')
+    const safeCursor = String(cursor || '').replace(/"/g, '\\"')
+    const input = cursor
+      ? `{ postId: "${safePostId}", limit: ${Number(limit) || 10}, cursor: "${safeCursor}" }`
+      : `{ postId: "${safePostId}", limit: ${Number(limit) || 10} }`
     const query = `
       query {
-        commentPublicByPostIdV2(input: { postId: "${safePostId}" }) {
+        commentPublicByPostIdV2(input: ${input}) {
           comments {
             ${COMMENT_FIELDS}
           }
@@ -55,14 +59,18 @@ const CommentsAPI = {
         }
       }
     `
-    return gql(query, variables)
+    return gql(query)
   },
 
-  getRepliesByCommentId: (commentId, variables = {}) => {
+  getRepliesByCommentId: (commentId, { limit = 10, cursor = '' } = {}) => {
     const safeCommentId = String(commentId || '').replace(/"/g, '\\"')
+    const safeCursor = String(cursor || '').replace(/"/g, '\\"')
+    const input = cursor
+      ? `{ commentId: "${safeCommentId}", limit: ${Number(limit) || 10}, cursor: "${safeCursor}" }`
+      : `{ commentId: "${safeCommentId}", limit: ${Number(limit) || 10} }`
     const query = `
       query {
-        replyPublicByCommentIdV2(input: { commentIds: "${safeCommentId}" }) {
+        replyPublicByCommentIdV2(input: ${input}) {
           comments {
             ${REPLY_FIELDS}
           }
@@ -72,7 +80,7 @@ const CommentsAPI = {
         }
       }
     `
-    return gql(query, variables)
+    return gql(query)
   },
 }
 

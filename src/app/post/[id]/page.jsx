@@ -6,6 +6,7 @@ import PostHeader from '@/features/feed/components/PostHeader'
 import PostMedia from '@/features/feed/components/PostMedia'
 import PostContent from '@/features/feed/components/PostContent'
 import PostActions from '@/features/feed/components/PostActions'
+import PostComments from '@/features/feed/components/PostComments'
 import PostsAPI from '@/lib/api/enpoints/posts.api'
 
 const PostDetailPage = () => {
@@ -104,6 +105,7 @@ const PostDetailPage = () => {
                     />
                 </div>
             </article>
+            <PostComments postId={post.id} totalCount={post.countComment} className='mt-4' />
         </div>
     )
 }
