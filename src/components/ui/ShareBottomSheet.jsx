@@ -23,28 +23,32 @@ const sheetVariants = {
   },
 }
 
-const getShareUrl = () => (typeof window !== 'undefined' ? window.location.href : 'https://mutoday.com')
-const SHARE_TEXT = 'มูทูเดย์ - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์'
+const DEFAULT_SHARE_URL = process.env.NEXT_PUBLIC_SHARE_URL || 'https://mu-today-web.vercel.app'
+const DEFAULT_SHARE_TEXT = process.env.NEXT_PUBLIC_SHARE_TEXT || 'คลับสายมู แชร์โพสต์ ทำนาย ดวง ฮวงจุ้ย และความเชื่อ'
+const FB_APP_ID = process.env.NEXT_PUBLIC_FB_APP_ID || '87741124305'
+
+const getShareUrl = () => (typeof window !== 'undefined' ? window.location.href : DEFAULT_SHARE_URL)
 
 const shareOptions = [
   {
     id: 'line',
     label: 'LINE',
     icon: '/social_icon/line.svg',
-    getUrl: () => `https://line.me/R/msg/text/?${encodeURIComponent(SHARE_TEXT + '\n' + getShareUrl())}`,
+    getUrl: () => `https://line.me/R/msg/text/?${encodeURIComponent(DEFAULT_SHARE_TEXT + '\n' + getShareUrl())}`,
   },
   {
     id: 'messenger',
     label: 'Messenger',
     icon: '/social_icon/message.svg',
-    action: 'copyAndOpen',
-    copyAndOpenUrl: 'https://www.messenger.com/',
+    getUrl: () =>
+      `https://www.facebook.com/dialog/send?app_id=${FB_APP_ID}&link=${encodeURIComponent(DEFAULT_SHARE_URL)}&redirect_uri=${encodeURIComponent(DEFAULT_SHARE_URL)}`,
   },
   {
     id: 'facebook',
     label: 'Facebook',
     icon: '/social_icon/facebook.svg',
-    getUrl: () => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getShareUrl())}`,
+    getUrl: () =>
+      `https://www.facebook.com/share_channel/?type=reshare&link=${encodeURIComponent(DEFAULT_SHARE_URL)}&app_id=${FB_APP_ID}&source_surface=external_reshare&display=popup&hashtag#`,
   },
   {
     id: 'instagram',
@@ -57,7 +61,7 @@ const shareOptions = [
     id: 'whatsapp',
     label: 'WhatsApp',
     icon: '/social_icon/weChat.svg',
-    getUrl: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(SHARE_TEXT + ' ' + getShareUrl())}`,
+    getUrl: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
   },
   {
     id: 'tiktok',

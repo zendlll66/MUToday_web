@@ -2,8 +2,11 @@ import "./globals.css";
 import SideBar from "@/components/layout/SideBar";
 import TokenInit from "@/components/TokenInit";
 
+// รูปแชร์ต้องเป็น PNG/JPEG/WebP — โซเชียลไม่ใช้ SVG (จึงไม่ใช้ logo01.svg)
+const ogImageUrl = process.env.NEXT_PUBLIC_OG_IMAGE || '/icons/og-logo.png'
+
 export const metadata = {
-  metadataBase: new URL('https://mutoday.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SHARE_URL || 'https://mutoday.com'),
   title: "Mutoday - Spiritual Community",
   description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์ A spiritual community for fortune telling, astrology, tarot, and spiritual content",
   openGraph: {
@@ -12,9 +15,9 @@ export const metadata = {
     siteName: 'Mutoday',
     images: [
       {
-        url: '/icons/logo01.svg',
-        width: 122,
-        height: 41,
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
         alt: 'Mutoday Logo',
       },
     ],
@@ -25,6 +28,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์",
     description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์",
+    images: [ogImageUrl],
   },
   other: {
     'dns-prefetch': 'https://pub-84690884fe94462e83399faa03011cbe.r2.dev',
