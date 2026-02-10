@@ -2,13 +2,13 @@
 import React from 'react'
 
 
-const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '' }) => {
+const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '', defaultValue = '' }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const searchValue = formData.get('search')
-        if (onSearch && searchValue) {
-            onSearch(searchValue)
+        if (onSearch) {
+            onSearch(searchValue ?? '')
         }
     }
 
@@ -34,6 +34,7 @@ const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '' }
                 <input
                     type="text"
                     name="search"
+                    defaultValue={defaultValue}
                     placeholder={placeholder}
                     className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:bg-white focus:border-purple-300 focus:ring-2 focus:ring-purple-100 outline-none transition-all"
                 />

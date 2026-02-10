@@ -1,15 +1,17 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import useTopicStore from '@/store/topic.store'
 import SearchAPI from '@/lib/api/enpoints/search.api'
 import ClubContentClient from './ClubContentClient'
 
 const ClubFeedClient = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const handlePostClick = (postId) => router.push(`/post/${postId}`)
   const selectedTopic = useTopicStore((s) => s.selectedTopic)
+  const searchKeyword = searchParams.get('q') ?? ''
   const [feedData, setFeedData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -19,7 +21,7 @@ const ClubFeedClient = () => {
       try {
         const res = await SearchAPI.searchPublicV2({
           limit: 10,
-          keyword: '',
+          keyword: searchKeyword ?? '',
           clubId: '',
           interest: selectedTopic?.name ?? '',
         })
@@ -32,7 +34,7 @@ const ClubFeedClient = () => {
       }
     }
     fetchSearch()
-  }, [selectedTopic?.id, selectedTopic?.name])
+  }, [selectedTopic?.id, selectedTopic?.name, searchKeyword])
 
   if (loading && !feedData) {
     return (

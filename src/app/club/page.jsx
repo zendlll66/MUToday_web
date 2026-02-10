@@ -1,7 +1,7 @@
 
 import React from 'react'
 import ClubFeedClient from '@/features/clubs/components/ClubFeedClient'
-import SearchBar from '@/components/ui/SearchBar'
+import ClubSearchBar from '@/features/clubs/components/ClubSearchBar'
 import TopicList from '@/features/clubs/components/TopicList'
 
 export const metadata = {
@@ -16,7 +16,7 @@ const page = () => {
         <h1 className='text-xl sm:text-2xl font-semibold text-gray-900 mb-4'>
           คลับสายมู
         </h1>
-        <SearchBar
+        <ClubSearchBar
           placeholder='ค้นหาโพสต์ แฮชแท็ก หรือสมาชิก...'
           className='max-w-[810px]'
         />
