@@ -154,7 +154,7 @@ const MasonryCard = ({ data, onPostClick }) => {
       }
 
       {/* Actions and Content */}
-      <div className='px-2 sm:px-4 md:px-6 lg:mt-[10px] pb-2 sm:pb-3 md:pb-4'>
+      <div className='px-2 sm:px-4 md:px-6 lg:mt-[10px] mt-[5px] pb-2 sm:pb-3 md:pb-4'>
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}
@@ -162,7 +162,7 @@ const MasonryCard = ({ data, onPostClick }) => {
           backgroundImage={{ textColor: '#000000' }}
           compact
           feed={true}
-          className='lg:mb-[10px]'
+          className='lg:mb-[10px] mb-[5px]'
         />
         <FooterCard
           user={data.user}

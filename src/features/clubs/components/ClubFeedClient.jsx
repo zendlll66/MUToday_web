@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import useTopicStore from '@/store/topic.store'
 import SearchAPI from '@/lib/api/enpoints/search.api'
 import ClubContentClient from './ClubContentClient'
+import MasonryCardSkeleton from './MasonryCardSkeleton'
 
 const ClubFeedClient = () => {
   const router = useRouter()
@@ -97,21 +98,31 @@ const ClubFeedClient = () => {
   }, [loadMore, feedData?.data?.searchPublicV2?.data?.meta?.hasNextPage])
 
   const hasNextPage = feedData?.data?.searchPublicV2?.data?.meta?.hasNextPage
-
-  if (loading && !feedData) {
-    return (
-      <div className='w-full py-16 text-center text-gray-500'>
-        <p className='text-sm'>กำลังโหลด...</p>
-      </div>
-    )
-  }
+  const isInitialLoading = loading && !feedData
 
   return (
     <>
-      <ClubContentClient data={feedData} onPostClick={handlePostClick} />
+      <ClubContentClient
+        data={feedData}
+        onPostClick={handlePostClick}
+        loading={isInitialLoading}
+      />
       {hasNextPage && (
-        <div ref={loadMoreRef} className='w-full py-4 flex justify-center'>
-          {loadingMore && <p className='text-gray-500 text-sm'>กำลังโหลด...</p>}
+        <div ref={loadMoreRef} className='w-full'>
+          {loadingMore ? (
+            <div className='grid grid-cols-2 gap-2 sm:gap-4 md:gap-6'>
+              <div className='flex flex-col gap-2 sm:gap-4 md:gap-6'>
+                <MasonryCardSkeleton />
+                <MasonryCardSkeleton />
+              </div>
+              <div className='flex flex-col gap-2 sm:gap-4 md:gap-6'>
+                <MasonryCardSkeleton />
+                <MasonryCardSkeleton />
+              </div>
+            </div>
+          ) : (
+            <div className='py-4' aria-hidden />
+          )}
         </div>
       )}
     </>

@@ -47,12 +47,18 @@ const TopicList = ({ onSelectTopic }) => {
   }
 
   if (loading) {
+    const skeletonWidths = ['w-16', 'w-24', 'w-20', 'w-28', 'w-14', 'w-20', 'w-16']
     return (
       <div className='w-full overflow-x-auto scrollbar-hide mb-4'>
         <ul className='flex flex-nowrap gap-4 sm:gap-6 pb-2 min-w-0'>
-          <li>
-            <span className='text-sm sm:text-base font-normal text-gray-400'>กำลังโหลด...</span>
-          </li>
+          {skeletonWidths.map((w, i) => (
+            <li key={i}>
+              <span
+                className={`block h-5 sm:h-6 rounded-full bg-gray-200 animate-shimmer ${w}`}
+                aria-hidden
+              />
+            </li>
+          ))}
         </ul>
       </div>
     )
