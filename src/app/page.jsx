@@ -1,10 +1,10 @@
 "use client"
 import React, { useEffect, useState, useRef, useCallback } from 'react'
-import PostCard from '@/features/feed/components/PostCard'
 import { useRouter } from 'next/navigation'
 import Banner from '@/components/ui/Banner'
-import SectionIcons from '@/components/ui/SectionIcons'
 import FeedAPI from '@/lib/api/enpoints/feed.api'
+import GuestAPI from '@/lib/api/enpoints/guest.api'
+import Token from '@/lib/api/axios/token'
 import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 
 const HomePage = () => {
@@ -14,6 +14,7 @@ const HomePage = () => {
     const loadMoreRef = useRef(null)
     const loadingMoreRef = useRef(false)
     const router = useRouter()
+    
     const mockFeedData = {
         "data": {
             "feed": {
@@ -402,12 +403,24 @@ const HomePage = () => {
     }, [feedData, page])
 
     useEffect(() => {
+        const ensureGuestToken = async () => {
+            if (Token.get()) return
+            try {
+                const response = await GuestAPI.getGuest()
+                const { token } = response?.data?.data || {}
+                if (token) Token.set(token)
+            } catch (error) {
+                console.error('Guest token failed:', error)
+            }
+        }
+
         const fetchFeed = async () => {
             try {
+                await ensureGuestToken()
                 const response = await FeedAPI.getFeed()
                 setFeedData(response || null)
             } catch (error) {
-                const err = error.response
+                const err = error?.response
                     ? {
                         status: error.response.status,
                         data: error.response.data,
@@ -416,7 +429,7 @@ const HomePage = () => {
                     }
                     : Array.isArray(error)
                         ? { gqlErrors: error }
-                        : { message: error.message, code: error.code }
+                        : { message: error?.message, code: error?.code }
                 console.error("Feed API error:", err)
             }
         }

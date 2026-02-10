@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import GuestAPI from '@/lib/api/enpoints/guest.api'
 import Token from '@/lib/api/axios/token'
+import ClubAPI from '@/lib/api/enpoints/club.api'
 
 const page = () => {
     const [message, setMessage] = useState('')
@@ -31,6 +32,20 @@ const page = () => {
             setIsLoading(false);
         }
     }
+
+    const handleGetInterestTopics = async () => {
+        setMessage('')
+        setIsLoading(true)
+        try {
+            const response = await ClubAPI.getInterestTopics();
+            console.log(response);
+        }
+        catch (error) {
+            setMessage(error.response?.data?.message || error.message || 'เกิดข้อผิดพลาด');
+        } finally {
+            setIsLoading(false);
+        }
+    }
     return (
         <div className='container mx-auto px-4 py-8 text-black'>
             <button
@@ -40,6 +55,17 @@ const page = () => {
             >
                 {isLoading ? 'กำลังโหลด...' : 'Get Guest'}
             </button>
+
+
+
+            <button
+                onClick={handleGetInterestTopics}
+                disabled={isLoading}
+                className='px-5 py-2 bg-gray-500 text-white rounded disabled:opacity-50'
+            >
+                {isLoading ? 'กำลังโหลด...' : 'Get Interest Topics'}
+            </button>
+            
             {message && (
                 <p className='mt-4 text-sm text-gray-700 max-w-md'>{message}</p>
             )}

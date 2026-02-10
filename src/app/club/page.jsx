@@ -1,6 +1,9 @@
+
 import React from 'react'
 import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 import SearchBar from '@/components/ui/SearchBar'
+import TopicList from '@/features/clubs/components/TopicList'
+
 export const metadata = {
   title: 'คลับสายมู | Mutoday - ชุมชนสายมู',
   description: 'ชุมชนสายมู แชร์โพสต์ ทำนาย ดวง ฮวงจุ้ย และความเชื่อ',
@@ -9,7 +12,7 @@ export const metadata = {
 const page = () => {
   const dataMock = {
     "data": {
-      "search": {
+      "feedPublicV2": {
         "data": {
           "posts": [
             {
@@ -327,9 +330,10 @@ const page = () => {
           placeholder='ค้นหาโพสต์ แฮชแท็ก หรือสมาชิก...'
           className='max-w-[810px]'
         />
-      </div>
+      </div>  
+      <TopicList />
       <ClubContentClient data={dataMock} />
-    </div>
+    </div>     
   )
 }
 
