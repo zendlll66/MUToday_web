@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react'
 import useTopicStore from '@/store/topic.store'
 import ClubAPI from '@/lib/api/enpoints/club.api'
 
-const DEFAULT_ALL = { id: 'all', name: 'ทั้งหมด' }
-
 const normalizeTopics = (raw) => {
   if (!raw) return []
   if (Array.isArray(raw)) return raw
@@ -34,12 +32,12 @@ const TopicList = ({ onSelectTopic }) => {
     fetchTopics()
   }, [])
 
-  const list = [DEFAULT_ALL, ...topics]
+  const list = topics
 
   useEffect(() => {
-    const ids = [DEFAULT_ALL.id, ...topics.map((t) => t.id)]
-    if (!ids.includes(selectedTopic.id)) {
-      setSelectedTopic(DEFAULT_ALL)
+    const ids = topics.map((t) => t.id)
+    if (ids.length > 0 && !ids.includes(selectedTopic.id)) {
+      setSelectedTopic(topics[0])
     }
   }, [topics, selectedTopic.id, setSelectedTopic])
 

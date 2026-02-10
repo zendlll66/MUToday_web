@@ -5,7 +5,7 @@ import MasonryCard from './MasonryCard'
 const PostCardMasonry = ({ data, onPostClick }) => {
   // const posts = data?.data?.search?.data?.posts || []
 
-  const posts = data?.data?.feedPublicV2?.data?.posts || []
+  const posts = data?.data?.feedPublicV2?.data?.posts || data?.data?.searchPublicV2?.data?.posts || []
   if (!posts || posts.length === 0) {
     return (
       <div className="w-full py-16 text-center text-gray-500">

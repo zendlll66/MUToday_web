@@ -9,6 +9,7 @@ const SEARCH_POST_FIELDS = `
   postDetail
   followed
   createdAt
+  hashTag
   images {
     id
     img
@@ -17,6 +18,11 @@ const SEARCH_POST_FIELDS = `
   backgroundImage {
     textColor
     img
+  }
+  user {
+    id
+    displayName
+    imgProfile
   }
 `
 
