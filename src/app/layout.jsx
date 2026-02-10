@@ -6,7 +6,7 @@ import TokenInit from "@/components/TokenInit";
 const ogImageUrl = process.env.NEXT_PUBLIC_OG_IMAGE || '/icons/og-logo.png'
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SHARE_URL || 'https://mutoday.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SHARE_URL || 'https://mu-today-web.vercel.app'),
   title: "Mutoday - Spiritual Community",
   description: "Mutoday - คลับสายมู คอมมูนิตี้โพสต์ทำนาย ดวง โหราศาสตร์ A spiritual community for fortune telling, astrology, tarot, and spiritual content",
   openGraph: {
