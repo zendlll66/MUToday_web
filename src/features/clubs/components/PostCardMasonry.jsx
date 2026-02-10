@@ -27,13 +27,13 @@ const PostCardMasonry = ({ data, onPostClick, loading = false }) => {
     )
   }
 
-  if (!posts || posts.length === 0) {
-    return (
-      <div className="w-full py-16 text-center text-gray-500">
-        <p className="text-sm">ไม่พบข้อมูล</p>
-      </div>
-    )
-  }
+  // if (!posts || posts.length === 0) {
+  //   return (
+  //     <div className="w-full py-16 text-center text-gray-500">
+  //       <p className="text-sm">ไม่พบข้อมูล</p>
+  //     </div>
+  //   )
+  // }
 
   const leftColumn = posts.filter((_, i) => i % 2 === 0)
   const rightColumn = posts.filter((_, i) => i % 2 === 1)
