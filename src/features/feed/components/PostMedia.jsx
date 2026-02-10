@@ -7,14 +7,13 @@ const PostMedia = ({ images, typeImg, backgroundImage, postDetail, isFirstPost =
     return (
       <div className='w-full'>
         {images.length === 1 ? (
-          <div className='relative w-full aspect-square bg-gray-100'>
-            <Image
+          <div className='relative w-full bg-gray-100'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={images[0].img || images[0].thumbnail}
               alt='Post image'
-              fill
-              className='object-cover  aspect-square'
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 500px, 500px'
-              priority={isFirstPost}
+              className='w-full h-auto block'
+              loading={isFirstPost ? 'eager' : 'lazy'}
             />
           </div>
         ) : (
