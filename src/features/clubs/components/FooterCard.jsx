@@ -25,7 +25,7 @@ const FooterCard = ({ user, createdAt, isOwner, isFirstPost = false, postId, cou
 
 
     return (
-        <div className='flex items-center gap-2 sm:gap-3 py-2 sm:py-3'>
+        <div className='flex items-center gap-2 sm:gap-3'>
             <div className='relative w-[30px] h-[30px] rounded-full overflow-hidden shrink-0'>
                 <Image
                     src={user.imgProfile || '/default-avatar.png'}

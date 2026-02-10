@@ -18,7 +18,6 @@ const ClubFeedClient = () => {
   const [loadingMore, setLoadingMore] = useState(false)
   const loadMoreRef = useRef(null)
   const loadingMoreRef = useRef(false)
-  const prevLoadingMoreRef = useRef(false)
 
   const loadMore = useCallback(async () => {
     const meta = feedData?.data?.searchPublicV2?.data?.meta
@@ -97,15 +96,7 @@ const ClubFeedClient = () => {
     return () => (el ? observer.unobserve(el) : undefined)
   }, [loadMore, feedData?.data?.searchPublicV2?.data?.meta?.hasNextPage])
 
-  // โหลดต่อเนื่องจนครบ: หลัง load more เสร็จถ้ามีหน้าถัดไปให้โหลดต่อ
   const hasNextPage = feedData?.data?.searchPublicV2?.data?.meta?.hasNextPage
-  useEffect(() => {
-    const wasLoading = prevLoadingMoreRef.current
-    prevLoadingMoreRef.current = loadingMore
-    if (wasLoading && !loadingMore && hasNextPage && feedData) {
-      loadMore()
-    }
-  }, [loadingMore, hasNextPage, feedData, loadMore])
 
   if (loading && !feedData) {
     return (

@@ -1,14 +1,37 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PostContent from '@/features/feed/components/PostContent'
 import FooterCard from './FooterCard'
 import PostHeader from '@/features/feed/components/PostHeader'
 import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
+const PLACEHOLDER_SINGLE = (
+  <div className='w-full aspect-square min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center bg-gray-100'>
+    <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
+  </div>
+)
+
+const PLACEHOLDER_CELL = (
+  <div className='w-full h-full flex items-center justify-center bg-gray-100'>
+    <span className='text-gray-400 text-xs'>ไม่มีรูป</span>
+  </div>
+)
+
 const MasonryCard = ({ data, onPostClick }) => {
+  const [singleImageError, setSingleImageError] = useState(false)
+  const [failedGridIndices, setFailedGridIndices] = useState({})
+
   if (!data) {
     return null
   }
+
+  const singleSrc = data.images?.[0]?.img || data.images?.[0]?.thumbnail
+  useEffect(() => {
+    setSingleImageError(false)
+  }, [singleSrc])
+  useEffect(() => {
+    setFailedGridIndices({})
+  }, [data?.id])
 
   // Format content with hashTag array highlighting
   const formatContentWithHashTags = (text, hashTag, textColor = '#000000') => {
@@ -50,27 +73,45 @@ const MasonryCard = ({ data, onPostClick }) => {
       {data.typeImg && data.images && data.images.length > 0 ? (
         <div className='w-full'>
           {data.images.length === 1 ? (
-            <div className='relative w-full [container-type:inline-size]'>
-              <img
-                src={data.images[0].img || data.images[0].thumbnail}
-                alt='Post image'
-                className='w-full h-auto max-h-[125cqw] sm:max-h-[140cqw] md:max-h-[160cqw] rounded-lg sm:rounded-[20px] md:rounded-[24px] object-cover object-top'
-                loading='lazy'
-              />
-            </div>
+            (() => {
+              const src = data.images[0].img || data.images[0].thumbnail
+              if (!src || singleImageError) {
+                return PLACEHOLDER_SINGLE
+              }
+              return (
+                <div className='relative w-full [container-type:inline-size]'>
+                  <img
+                    src={src}
+                    alt='Post image'
+                    className='w-full h-auto max-h-[125cqw] sm:max-h-[140cqw] md:max-h-[160cqw] rounded-lg sm:rounded-[20px] md:rounded-[24px] object-cover object-top'
+                    loading='lazy'
+                    onError={() => setSingleImageError(true)}
+                  />
+                </div>
+              )
+            })()
           ) : (
             <div className='grid grid-cols-2 gap-0.5 sm:gap-1 md:gap-2'>
-              {data.images.slice(0, 4).map((image, index) => (
+              {data.images.slice(0, 4).map((image, index) => {
+                const src = image.thumbnail || image.img
+                const hasError = failedGridIndices[index]
+                const showPlaceholder = !src || hasError
+                return (
                 <div
                   key={image.id || index}
                   className='relative bg-gray-100 aspect-square'
                 >
-                  <img
-                    src={image.thumbnail || image.img}
-                    alt={`Post image ${index + 1}`}
-                    className='w-full h-full object-cover'
-                    loading='lazy'
-                  />
+                  {showPlaceholder ? (
+                    PLACEHOLDER_CELL
+                  ) : (
+                    <img
+                      src={src}
+                      alt={`Post image ${index + 1}`}
+                      className='w-full h-full object-cover'
+                      loading='lazy'
+                      onError={() => setFailedGridIndices((prev) => ({ ...prev, [index]: true }))}
+                    />
+                  )}
                   {index === 3 && data.images.length > 4 && (
                     <div className='absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none'>
                       <span className='text-white font-medium text-xs sm:text-sm'>
@@ -79,7 +120,8 @@ const MasonryCard = ({ data, onPostClick }) => {
                     </div>
                   )}
                 </div>
-              ))}
+              )
+              })}
             </div>
           )}
         </div>
@@ -112,14 +154,15 @@ const MasonryCard = ({ data, onPostClick }) => {
       }
 
       {/* Actions and Content */}
-      <div className='px-2 sm:px-4 md:px-6 mt-2 sm:mt-3 md:mt-4 pb-2 sm:pb-3 md:pb-4'>
+      <div className='px-2 sm:px-4 md:px-6 lg:mt-[10px] pb-2 sm:pb-3 md:pb-4'>
         <PostContent
           postDetail={data.postDetail}
           hashTag={data.hashTag}
           user={data.user}
-          backgroundImage={data.backgroundImage}
+          backgroundImage={{ textColor: '#000000' }}
           compact
           feed={true}
+          className='lg:mb-[10px]'
         />
         <FooterCard
           user={data.user}
