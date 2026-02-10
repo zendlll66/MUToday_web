@@ -22,8 +22,8 @@ export async function generateMetadata({ params }) {
             const description = post.postDetail
                 ? (post.postDetail || '').slice(0, 160)
                 : `โพสต์จาก ${post.user?.displayName || 'Mutoday'} ในชุมชน Mutoday`
-            const ogImage = post.images?.[0]?.img || post.backgroundImage?.img || 'https://mutoday.com/icons/logo01.svg'
-            const ogUrl = `https://mutoday.com/post/${id}`
+            const ogImage = post.images?.[0]?.img || post.backgroundImage?.img || process.env.NEXT_PUBLIC_OG_IMAGE
+            const ogUrl = `https://mu-today-web.vercel.app/post/${id}`
             return {
                 title,
                 description,
