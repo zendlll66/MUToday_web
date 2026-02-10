@@ -15,7 +15,7 @@ const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '', 
     return (
         <form onSubmit={handleSubmit} className={`w-full ${className}`}>
             <div className="relative w-full flex items-center">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                     <svg
                         className="w-5 h-5 text-gray-400"
                         fill="none"

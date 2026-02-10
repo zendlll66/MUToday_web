@@ -17,7 +17,7 @@ export const formatHashtagsInText = (text, textColor = '#000000') => {
   const parts = text.split(/(#[^\s#]+)/g)
 
   return (
-    <div className='whitespace-pre-wrap'>
+    <span className='whitespace-pre-wrap'>
       {parts.map((part, index) => {
         if (part.startsWith('#')) {
           // แยก # และข้อความหลัง # เพื่อให้ # มีสีด้วย
@@ -25,8 +25,6 @@ export const formatHashtagsInText = (text, textColor = '#000000') => {
           const hashContent = part.slice(1) // ข้อความหลัง #
           const hashtag = hashContent // hashtag without #
 
-          console.log(hashtag)
-          
           return (
             <Link
               key={index}
@@ -44,7 +42,7 @@ export const formatHashtagsInText = (text, textColor = '#000000') => {
         }
         return <span key={index} style={{ color: textColor }}>{part}</span>
       })}
-    </div>
+    </span>
   )
 }
 
@@ -76,7 +74,7 @@ export const highlightHashTags = (text, hashTags = [], textColor = '#000000') =>
   const parts = text.split(regex)
 
   return (
-    <div className='whitespace-pre-wrap'>
+    <span className='whitespace-pre-wrap'>
       {parts.map((part, index) => {
         // ตรวจสอบว่า part ตรงกับ hashTag หรือไม่ (มีหรือไม่มี #)
         const isHashTag = hashTags.some(tag => {
@@ -118,6 +116,6 @@ export const highlightHashTags = (text, hashTags = [], textColor = '#000000') =>
         }
         return <span key={index} style={{ color: textColor }}>{part}</span>
       })}
-    </div>
+    </span>
   )
 }

@@ -1,8 +1,6 @@
-
 import React from 'react'
-import ClubFeedClient from '@/features/clubs/components/ClubFeedClient'
+import ClubFeedSection from '@/features/clubs/components/ClubFeedSection'
 import ClubSearchBar from '@/features/clubs/components/ClubSearchBar'
-import TopicList from '@/features/clubs/components/TopicList'
 
 export const metadata = {
   title: 'คลับสายมู | Mutoday - ชุมชนสายมู',
@@ -17,13 +15,12 @@ const page = () => {
           คลับสายมู
         </h1>
         <ClubSearchBar
-          placeholder='ค้นหาโพสต์ แฮชแท็ก หรือสมาชิก...'
+          placeholder='search community posts'
           className='max-w-[810px]'
         />
-      </div>  
-      <TopicList />
-      <ClubFeedClient />
-    </div>     
+      </div>
+      <ClubFeedSection />
+    </div>
   )
 }
 

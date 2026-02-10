@@ -38,6 +38,7 @@ const SearchAPI = {
     const keyword = (input.keyword ?? '').replace(/"/g, '\\"')
     const clubId = (input.clubId ?? '').replace(/"/g, '\\"')
     const interest = (input.interest ?? '').replace(/"/g, '\\"')
+    const cursor = (input.cursor ?? '').replace(/"/g, '\\"')
 
     const query = `
       query {
@@ -45,7 +46,8 @@ const SearchAPI = {
           limit: ${limit},
           keyword: "${keyword}",
           clubId: "${clubId}",
-          interest: "${interest}"
+          interest: "${interest}",
+          cursor: "${cursor}"
         }) {
           data {
             posts {

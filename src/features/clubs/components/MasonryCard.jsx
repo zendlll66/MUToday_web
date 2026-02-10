@@ -3,11 +3,26 @@ import React from 'react'
 import PostContent from '@/features/feed/components/PostContent'
 import FooterCard from './FooterCard'
 import PostHeader from '@/features/feed/components/PostHeader'
+import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
 const MasonryCard = ({ data, onPostClick }) => {
   if (!data) {
     return null
   }
+
+  // Format content with hashTag array highlighting
+  const formatContentWithHashTags = (text, hashTag, textColor = '#000000') => {
+    if (!text) return null
+
+    // ถ้ามี hashTag array ให้ highlight คำเหล่านั้น
+    if (hashTag && hashTag.length > 0) {
+      return highlightHashTags(text, hashTag, textColor)
+    }
+
+    // ถ้าไม่มี hashTag array ใช้ textColor ที่ส่งมา (default #000000)
+    return formatHashtagsInText(text, textColor)
+  }
+
 
   const handleCardClick = () => {
     if (onPostClick) {
@@ -84,7 +99,7 @@ const MasonryCard = ({ data, onPostClick }) => {
               }}
             >
               <p className='text-xs sm:text-sm md:text-base font-medium leading-relaxed line-clamp-4'>
-                {data.postDetail}
+              {formatContentWithHashTags(data.postDetail, data.hashTag, data.backgroundImage?.textColor || '#000000')}
               </p>
             </div>
           )}
