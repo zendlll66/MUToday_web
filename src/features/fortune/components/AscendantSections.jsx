@@ -6,10 +6,10 @@ import Image from 'next/image'
 const AscendantSections = () => {
     return (
         <section
-            className="relative w-full min-h-0 px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16 lg:min-h-[80vh] lg:px-12 lg:py-20"
+            className="relative w-full  px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16  lg:px-12"
             aria-label="ลัคนาราศี"
         >
-            <div className="container mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-10 md:gap-12 lg:min-h-[70vh] lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+            <div className=" mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-10 md:gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
                 {/* ซ้าย: หัวข้อ + รูป (แสดงเมื่อ < lg) + คำอธิบาย */}
                 <div className="flex flex-col items-center text-center lg:items-start lg:text-left justify-center">
                     <h2 className="mb-4 text-2xl font-bold tracking-tight text-mu-text sm:mb-5 sm:text-3xl md:text-4xl lg:mb-6 lg:text-5xl">

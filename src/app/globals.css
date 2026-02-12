@@ -232,3 +232,28 @@ html {
     @apply bg-background ;
   }
 } */
+
+/* Card stack decorative (fortune) */
+.iridescent-overlay {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 50%, rgba(255, 215, 0, 0.04) 100%);
+}
+.card-stars {
+  pointer-events: none;
+}
+.card-stars .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+.card-stars .star:nth-child(5n) { left: 10%; top: 20%; animation-delay: 0.2s; }
+.card-stars .star:nth-child(5n+1) { left: 25%; top: 70%; animation-delay: 0.5s; }
+.card-stars .star:nth-child(5n+2) { left: 60%; top: 15%; animation-delay: 0.8s; }
+.card-stars .star:nth-child(5n+3) { left: 80%; top: 60%; animation-delay: 1.1s; }
+.card-stars .star:nth-child(5n+4) { left: 40%; top: 40%; animation-delay: 1.4s; }
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}

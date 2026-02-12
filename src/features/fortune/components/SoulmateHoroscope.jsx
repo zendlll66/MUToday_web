@@ -31,27 +31,6 @@ const SoulmateHoroscope = () => {
         {/* ขวา: แสดงรูป soulmate ชิดขวา (วง 90% + heart lock) */}
         <div className="relative flex min-h-[280px] items-center justify-end sm:min-h-[320px]">
           <div className="relative flex items-center justify-end gap-4 sm:gap-6">
-            {/* วงเปอร์เซ็นต์ 90% */}
-            <div className="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-white/80 shadow-md sm:h-28 sm:w-28">
-              <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
-                <path
-                  className="fill-none stroke-mu-text/15"
-                  strokeWidth="2.5"
-                  d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"
-                />
-                <path
-                  className="fill-none stroke-mu-text"
-                  strokeWidth="2.5"
-                  strokeDasharray="87.65 9.74"
-                  strokeLinecap="round"
-                  d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"
-                />
-              </svg>
-              <span className="absolute text-lg font-bold text-mu-text sm:text-xl">
-                90%
-              </span>
-            </div>
-
             {/* รูป soulmate — ขวามือ แสดงรูปแบบนี้ */}
             <div className="relative h-[180px] w-[240px] shrink-0 sm:h-[200px] sm:w-[280px] md:h-[220px] md:w-[320px]">
               <Image
