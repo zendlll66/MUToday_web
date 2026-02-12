@@ -206,6 +206,24 @@ html {
   animation: shimmer 3s ease-in-out infinite;
 }
 
+/* DailyHoroscopeSection: ขอบเว้า responsive จอเล็กเว้าน้อย จอใหญ่เว้ามาก */
+.daily-horoscope-clipped {
+  clip-path: url(#daily-horoscope-concave-sm);
+  -webkit-clip-path: url(#daily-horoscope-concave-sm);
+}
+@media (min-width: 640px) {
+  .daily-horoscope-clipped {
+    clip-path: url(#daily-horoscope-concave-md);
+    -webkit-clip-path: url(#daily-horoscope-concave-md);
+  }
+}
+@media (min-width: 1024px) {
+  .daily-horoscope-clipped {
+    clip-path: url(#daily-horoscope-concave-lg);
+    -webkit-clip-path: url(#daily-horoscope-concave-lg);
+  }
+}
+
 /* @layer base {
   * {
     @apply border-border outline-ring/50;
