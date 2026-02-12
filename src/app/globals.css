@@ -42,6 +42,7 @@
   --mu-pink: #d747a7;
   --mu-red: #f72727;
   --mu-text: #3b1f5f;
+  --mu-purple: #F0EFFF;
   --mu-button: linear-gradient(180deg, #f0efff 0%, #cccaf4 100%);
   --radius: 0.625rem;
   --background: #ffffff;
@@ -81,6 +82,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-mu-blue: var(--mu-blue);
+  --color-mu-purple: var(--mu-purple);
   --color-mu-violet: var(--mu-violet);
   --color-mu-pink: var(--mu-pink);
   --color-mu-red: var(--mu-red);
