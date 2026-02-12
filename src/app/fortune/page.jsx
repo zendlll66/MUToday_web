@@ -3,6 +3,8 @@ import { ScrollToTopOnLoad } from '@/features/fortune/components/ScrollToTopOnLo
 import { StarOverlay } from '@/features/fortune/components/StarOverlay'
 import DailyHoroscopeSection from '@/features/fortune/components/DailyHoroscopeSection'
 import AscendantSections from '@/features/fortune/components/AscendantSections'
+import WallpaperSections from '@/features/fortune/components/WallpaperSections'
+import SummarizeSections from '@/features/fortune/components/SummarizeSections'
 
 const page = () => {
     return (
@@ -23,6 +25,14 @@ const page = () => {
 
             <div className="relative z-10 min-h-screen">    
                 <AscendantSections />
+            </div>
+
+            <div className="relative z-10">    
+                <WallpaperSections />
+            </div>
+
+            <div className="relative z-10">    
+                <SummarizeSections />
             </div>
             
         </div>
