@@ -5,6 +5,7 @@ import DailyHoroscopeSection from '@/features/fortune/components/DailyHoroscopeS
 import AscendantSections from '@/features/fortune/components/AscendantSections'
 import WallpaperSections from '@/features/fortune/components/WallpaperSections'
 import SummarizeSections from '@/features/fortune/components/SummarizeSections'
+import SoulmateHoroscope from '@/features/fortune/components/SoulmateHoroscope'
 
 const page = () => {
     return (
@@ -29,6 +30,10 @@ const page = () => {
 
             <div className="relative z-10">    
                 <WallpaperSections />
+            </div>
+
+            <div className="relative z-10">    
+                <SoulmateHoroscope />
             </div>
 
             <div className="relative z-10">    

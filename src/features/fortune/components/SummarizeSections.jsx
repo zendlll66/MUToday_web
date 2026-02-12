@@ -6,7 +6,7 @@ import Image from 'next/image'
 const SummarizeSections = () => {
   return (
     <section
-      className="relative w-full bg-[#f0edff] px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16 lg:px-12 lg:py-20"
+      className="relative w-full bg-[#F4F3FF] px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16 lg:px-12 lg:py-20"
       aria-label="รวมศาสตร์แห่งศรัทธา"
     >
       <div className="container mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-10 md:gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
