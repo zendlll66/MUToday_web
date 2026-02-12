@@ -1,6 +1,9 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
-/** วงกลมซ้อน 7 ชั้น เป็น div สีซ้อนกัน: วงกลาง 500px, ถัดไป +100px (ปรับ opacity ได้) */
+
+
 const PURPLE = '130, 110, 210'
 const SIZES = [500, 600, 700, 800, 900, 1000, 1100] // diameter แต่ละชั้น
 const OPACITIES = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05] // วงใน → วงนอก
@@ -30,22 +33,54 @@ const ConcentricGlow = ({ className = '' }) => (
   </div>
 )
 
-const FEATURES = [
-  { id: 1, label: 'พลังงานประจำวัน' },
-  { id: 2, label: 'สีเสื้อมงคลเสริมพลัง' },
-  { id: 3, label: 'การเคลื่อนย้ายของดวงดาว' },
-  { id: 4, label: 'เลขมงคลประจำวัน' },
-  { id: 5, label: 'กราฟชีวิตรายวัน' },
+
+const WALLPAPERS = [
+  {
+    id: 1,
+    src: '/wallpaper/Wallpaper-01.png',
+    alt: 'Serene spiritual elder with halo and staff, Mutoday auspicious wallpaper',
+  },
+  {
+    id: 2,
+    src: '/wallpaper/Wallpaper-02.png',
+    alt: 'Warrior figure with beard and sword in mystic clouds against golden crescent moon, Mutoday spiritual art',
+  },
+  {
+    id: 3,
+    src: '/wallpaper/Wallpaper-03.png',
+    alt: 'Guan Yu in golden armor with guan dao and dragon, Mutoday spiritual wallpaper',
+  },
+  {
+    id: 4,
+    src: '/wallpaper/Wallpaper-04.png',
+    alt: 'Three revered figures in golden robes amidst celestial clouds, Mutoday auspicious art',
+  },
+  {
+    id: 5,
+    src: '/wallpaper/Wallpaper-05.png',
+    alt: 'Wise elder reading book under full moon in red robes, Mutoday spiritual wallpaper',
+  },
+  {
+    id: 6,
+    src: '/wallpaper/Wallpaper-06.png',
+    alt: 'Elder with golden halo and staff in traditional robes, Mutoday spiritual art',
+  },
+  {
+    id: 7,
+    src: '/wallpaper/Wallpaper-07.png',
+    alt: 'Sun Wukong Monkey King in golden armor with staff leaping through clouds, Mutoday wallpaper',
+  },
 ]
 
-/**
- * Section มีขอบเว้า (concave) ตรงกลางทั้งบนและล่าง
- * ใช้ SVG clipPath เพื่อให้ขอบบนโค้งลงตรงกลาง ขอบล่างโค้งขึ้นตรงกลาง
- * เลย์เอาต์: ซ้าย = รูปแอป + ข้อความ, ขวา = รายการฟีเจอร์ (อยู่ข้างรูป)
- */
+const CENTER_INDEX = 3 // 0-based, การ์ดที่ 4 อยู่กลาง
+const BASE_W = 180
+const BASE_H = 395
+const SCALE_STEP = 0.05 // แต่ละชั้นห่างกลางเล็กลง 12%
+const OVERLAP_RATIO = 0.15 // การ์ดซ้อนกันประมาณ 45%
+
 const WallpaperSections = () => {
   return (
-    <section className="relative w-full" aria-label="ทำนายวันนี้">
+    <section className="relative w-full" aria-label="วอลเปเปอร์มงคล">
       {/* clipPath หลายระดับ: จอเล็กเว้าน้อย จอใหญ่เว้ามาก */}
       <svg width={0} height={0} className="absolute" aria-hidden>
         <defs>
@@ -63,50 +98,65 @@ const WallpaperSections = () => {
       <div className="absolute top-0 left-0 h-full w-full">
         <ConcentricGlow />
       </div>
-      <div
-        className="daily-horoscope-clipped flex min-h-[80vh] flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
-      >
-        {/* ซ้าย: รูปแอป */}
-        <div className="flex flex-col items-center lg:flex-1">
-          <Image
-            src="/img/app.svg"
-            alt="แอปทำนายวันนี้"
-            width={524}
-            height={580}
-            className="w-full max-w-[280px] py-8 sm:max-w-[320px] lg:max-w-[360px]"
-          />
-        </div>
+      <div className="mx-auto">
 
-        {/* ขวา: หัวข้อ + รายการฟีเจอร์ (อยู่ข้างรูป) */}
-        <div className="mt-8 w-full mx-auto justify-center items-center lg:items-start max-w-md lg:mt-0 lg:flex-1 md:pb-20 lg:max-w-none">
-          <h2 className="mb-2 text-2xl font-bold text-mu-text sm:text-3xl text-center lg:text-left">ดวงรายวัน</h2>
-          <p className="mb-6  text-sm text-mu-text/80 sm:mb-8 sm:text-base text-center lg:mx-0 lg:text-left max-w-[230px] mx-auto">
-            อัปเดตพลังดวงในแต่ละวัน เพื่อให้คุณใช้ชีวิตได้ตรงจังหวะที่สุด
-          </p>
-          <ul className="flex flex-col gap-2 justify-center w-fit items-start lg:items-start mx-auto lg:mx-0">
-            {FEATURES.map((item) => (
-              <li
-                key={item.id}
-                className="flex items-center gap-4 justify-center"
-              >
-                <span
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm sm:h-11 sm:w-11"
-                  aria-hidden
-                >
-                  <Image
-                    src="/icons/icon-stars.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    className="h-5 w-5 sm:h-6 sm:w-6"
-                  />
-                </span>
-                <span className="text-sm font-medium text-mu-text sm:text-base">
-                  {item.label}
-                </span>
-              </li>
-            ))}
-          </ul>
+
+        {/* แถบการ์ด: กลางใหญ่สุด ค่อยๆ เล็กลงซ้ายขวา กลางอยู่บนสุด (z-index สูงสุด) */}
+        <div
+          className="daily-horoscope-clipped flex min-h-[80vh] flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
+        >
+          <div>
+            {/* Header */}
+            <header className="mb-8 text-center sm:mb-10">
+              <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
+                วอลเปเปอร์มงคล
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#5C4B9E]/90 sm:text-base">
+                วอลเปเปอร์มงคลเฉพาะบุคคล ออกแบบตามพลังดวงและคำทำนายของคุณ
+                เพื่อเสริมพลังชีวิต โชคลาภ และความราบรื่นในทุกวัน
+              </p>
+            </header>
+            <div className="flex justify-center overflow-x-auto overflow-y-visible pb-4 pt-2 scrollbar-hide">
+              <div className="flex items-center justify-center gap-0 px-2 sm:px-4">
+                {WALLPAPERS.map((wallpaper, index) => {
+                  const distance = Math.abs(index - CENTER_INDEX)
+                  const scale = 1 - distance * SCALE_STEP
+                  const zIndex = WALLPAPERS.length - distance
+                  const w = Math.round(BASE_W * scale)
+                  const h = Math.round(BASE_H * scale)
+                  const overlap = Math.round(w * OVERLAP_RATIO)
+                  return (
+                    <div
+                      key={wallpaper.id}
+                      className="relative shrink-0 transition-all duration-300 hover:z-20 hover:scale-105"
+                      style={{
+                        zIndex,
+                        marginLeft: index === 0 ? 0 : -overlap,
+                      }}
+                    >
+                      <div
+                        className="relative"
+                        style={{
+                          width: w,
+                          height: h,
+                        }}
+                      >
+                        <Image
+                          src={wallpaper.src}
+                          alt={wallpaper.alt}
+                          fill
+                          sizes="(max-width: 800px) 160px, 180px"
+                          className="object-contain object-top"
+                          loading={index >= CENTER_INDEX - 2 && index <= CENTER_INDEX + 2 ? 'eager' : 'lazy'}
+                        />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

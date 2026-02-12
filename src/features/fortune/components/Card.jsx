@@ -63,7 +63,24 @@ const Card = () => {
     }
   }, [])
 
-  return <div ref={containerRef} className="min-h-[500px] w-full" />
+  return (
+    <>
+      {/* Header */}
+      <header className="text-center ">
+        <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
+          ไพ่ทาโรต์
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#5C4B9E]/90 sm:text-base">
+          ศาตร์แห่งการทำนายที่มีความเป็นมากว่า 600 ปี นำสัญลักษณ์ดั้งเดิมมาปรับโฉมใหม่
+          ผสมผสานเทคโนโลยีเอไอ อ่านความเชื่อมโยงของหน้าไพ่ พร้อมให้คุณตั้งคำถามได้ทุกเรื่องในชีวิต
+        </p>
+      </header>
+      <div ref={containerRef} className=" mt-[-100px] w-full" />
+    </>
+  )
+
+
+
 }
 
 export default Card

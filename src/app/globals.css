@@ -224,6 +224,24 @@ html {
   }
 }
 
+/* WallpaperSections: ขอบเว้า responsive แบบเดียวกับ DailyHoroscope */
+.wallpaper-clipped {
+  clip-path: url(#wallpaper-concave-sm);
+  -webkit-clip-path: url(#wallpaper-concave-sm);
+}
+@media (min-width: 640px) {
+  .wallpaper-clipped {
+    clip-path: url(#wallpaper-concave-md);
+    -webkit-clip-path: url(#wallpaper-concave-md);
+  }
+}
+@media (min-width: 1024px) {
+  .wallpaper-clipped {
+    clip-path: url(#wallpaper-concave-lg);
+    -webkit-clip-path: url(#wallpaper-concave-lg);
+  }
+}
+
 /* @layer base {
   * {
     @apply border-border outline-ring/50;
