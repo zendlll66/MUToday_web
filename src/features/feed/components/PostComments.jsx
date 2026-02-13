@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Heart, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import CommentsAPI from '@/lib/api/enpoints/comments.api'
 
 const CommentItem = ({
@@ -30,14 +30,14 @@ const CommentItem = ({
   }, [repliesExpanded, hasReplies, replyList.length, comment.id, onLoadReplies])
 
   return (
-    <div className={isReply ? 'pl-6 mt-3' : 'py-3'}>
+    <div className={isReply ? ' mt-3' : 'py-3'}>
       <div className="flex gap-3">
-        <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0">
+        <div className="relative w-[30px] h-[30px] rounded-full overflow-hidden shrink-0">
           <Image
             src={comment.user?.imgProfile || '/icons/logo01.svg'}
             alt={comment.user?.displayName || ''}
-            width={32}
-            height={32}
+            width={30}
+            height={30}
             className="object-cover w-full h-full"
           />
         </div>
@@ -60,18 +60,26 @@ const CommentItem = ({
               ตอบกลับ
             </button>
             <div className="flex items-center gap-1 text-gray-400">
-              <Heart className="w-3.5 h-3.5" strokeWidth={1.5} />
+              <Image
+                src="/icons/favourite.svg"
+                alt=""
+                width={14}
+                height={14}
+                className="w-3.5 h-3.5 shrink-0"
+              />
               <span className="text-xs">{comment.countLike ?? '0'}</span>
             </div>
           </div>
 
           {hasReplies && (
-            <div className="mt-2 border-l border-gray-200 pl-3">
-              <button
-                type="button"
-                onClick={handleToggleReplies}
-                className="text-xs text-gray-400 hover:text-gray-600"
-              >
+            <div className="mt-2 pt-3">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-px bg-gray-200 shrink-0" aria-hidden />
+                <button
+                  type="button"
+                  onClick={handleToggleReplies}
+                  className="text-xs text-gray-400 hover:text-gray-600"
+                >
                 {repliesExpanded
                   ? replyList.length > 0
                     ? `ซ่อนข้อความตอบกลับ ${countReply} รายการ`
@@ -79,7 +87,8 @@ const CommentItem = ({
                       ? 'กำลังโหลด...'
                       : `ดูข้อความตอบกลับ ${countReply} รายการ`
                   : `ดูข้อความตอบกลับ ${countReply} รายการ`}
-              </button>
+                </button>
+              </div>
               {repliesExpanded && replyList.length > 0 && (
                 <div className="mt-2 space-y-0">
                   {replyList.map((reply) => (

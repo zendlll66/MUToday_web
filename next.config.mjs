@@ -16,7 +16,17 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'pub-b6334549a3094c3fb6cdf689f8cced6a.r2.dev',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'trscgkhvrgonyogctiqb.supabase.co',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ayehnamnelzznswzlvzg.supabase.co',
         pathname: '/**',
       },
     ],

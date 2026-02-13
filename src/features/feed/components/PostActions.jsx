@@ -28,7 +28,7 @@ const PostActions = ({ postId, liked, countLike, countComment }) => {
             <div className='flex items-center gap-4 '>
                 <button
                     onClick={handleLike}
-                    className='flex items-center gap-1.5 text-gray-600 transition-colors cursor-pointer'
+                    className='flex items-center gap-1.5 text-black transition-colors cursor-pointer'
                     aria-label='Like'
                 >
                     <motion.div
@@ -36,7 +36,7 @@ const PostActions = ({ postId, liked, countLike, countComment }) => {
                         whileTap={{ scale: 0.9 }}
                         transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
-                        <Image src={'/icons/favourite.svg'} alt='favourite' width={24} height={24} />
+                        <Image src={'/icons/favourite2.svg'} alt='favourite' width={24} height={25} />
                     </motion.div>
                     <span className='text-sm font-medium'>
                         {countLike || '0'}
@@ -45,7 +45,7 @@ const PostActions = ({ postId, liked, countLike, countComment }) => {
 
                 <button
                     onClick={handleComment}
-                    className='flex items-center gap-1.5 text-gray-600 transition-colors cursor-pointer'
+                    className='flex items-center gap-1.5 text-black transition-colors cursor-pointer'
                     aria-label='Comment'
                 >
                     <motion.div

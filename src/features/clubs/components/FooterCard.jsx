@@ -52,7 +52,7 @@ const FooterCard = ({ user, createdAt, isOwner, isFirstPost = false, postId, cou
                 <div className='flex items-center gap-4 '>
                     <button
                         onClick={handleLike}
-                        className='flex items-center gap-1.5 text-[#AAA] transition-colors cursor-pointer'
+                        className='flex items-center gap-[3px] text-[#AAA] transition-colors cursor-pointer'
                         aria-label='Like'
                     >
                         <motion.div
@@ -60,7 +60,7 @@ const FooterCard = ({ user, createdAt, isOwner, isFirstPost = false, postId, cou
                             whileTap={{ scale: 0.9 }}
                             transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         >
-                            <Image src={'/icons/favourite.svg'} alt='favourite' width={16} height={18} className='w-4 h-[18px]' />
+                            <Image src={'/icons/favourite2.svg'} alt='favourite' width={24} height={24} className='w-4 h-4 opacity-50' />
                         </motion.div>
                         <span className='text-xs sm:text-sm font-medium'>
                             {countLike || '0'}
