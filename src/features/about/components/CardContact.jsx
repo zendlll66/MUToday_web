@@ -58,7 +58,7 @@ const CardContact = () => {
                     <div className="flex flex-wrap gap-x-10 gap-y-4">
                         <div className="flex flex-col gap-3">
                             <Link
-                                href="https://www.facebook.com/mutoday"
+                                href="https://www.facebook.com/MUTODAYOfficial"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2.5 text-black hover:opacity-80 transition-opacity"

@@ -128,7 +128,7 @@ const SideBar = () => {
         <div className="p-6">
           <Link href="/" className="flex flex-col gap-1 items-start">
             <Image
-              src="/icons/logo01.svg"
+              src="/icons/logo05.svg"
               alt="MUToday"
               width={122}
               height={41}

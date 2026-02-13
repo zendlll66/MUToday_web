@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useIsMobile } from '@/hooks/use-mobile'
+import ConcentricGlow from '@/components/ui/ConcentricGlow'
 
 const fadeUp = {
   initial: { opacity: 0, y: 12 },
@@ -15,36 +16,6 @@ const staggerContainer = {
     transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
 }
-
-const PURPLE = '130, 110, 210'
-const SIZES = [500, 600, 700, 800, 900, 1000, 1100] // diameter แต่ละชั้น
-const OPACITIES = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05] // วงใน → วงนอก
-
-const ConcentricGlow = ({ className = '' }) => (
-  <div
-    className={`pointer-events-none absolute inset-0 flex items-center justify-center ${className}`}
-    aria-hidden
-  >
-    {[...SIZES].reverse().map((size, i) => {
-      const idx = SIZES.length - 1 - i
-      return (
-        <div
-          key={idx}
-          className="absolute rounded-full"
-          style={{
-            width: size,
-            height: size,
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: `rgba(${PURPLE}, ${OPACITIES[idx]})`,
-          }}
-        />
-      )
-    })}
-  </div>
-)
-
 
 const WALLPAPERS = [
   {
