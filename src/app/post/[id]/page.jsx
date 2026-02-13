@@ -102,6 +102,7 @@ const PostDetailPage = () => {
                         user={post.user}
                         createdAt={post.createdAt}
                         backgroundImage={post.backgroundImage}
+                        truncate={false}
                     />
                 </div>
             </article>

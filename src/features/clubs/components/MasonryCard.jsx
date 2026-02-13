@@ -1,20 +1,21 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { Image as ImageIcon } from 'lucide-react'
 import PostContent from '@/features/feed/components/PostContent'
 import FooterCard from './FooterCard'
 import PostHeader from '@/features/feed/components/PostHeader'
 import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
 const PLACEHOLDER_SINGLE = (
-  <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center bg-gray-100'>
-    <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
+  <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex flex-col items-center justify-center gap-2 bg-gray-100'>
+    <ImageIcon className='w-12 h-12 text-gray-400' strokeWidth={1.5} aria-hidden />
   </div>
 )
 
 const PLACEHOLDER_CELL = (
-  <div className='w-full h-full flex items-center justify-center bg-gray-100'>
-    <span className='text-gray-400 text-xs'>ไม่มีรูป</span>
+  <div className='w-full h-full flex flex-col items-center justify-center gap-1 bg-gray-100'>
+    <ImageIcon className='w-8 h-8 text-gray-400' strokeWidth={1.5} aria-hidden />
   </div>
 )
 
@@ -154,8 +155,8 @@ const MasonryCard = ({ data, onPostClick, priority = false }) => {
           )}
         </div>
       ) : (
-        <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center'>
-          <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
+        <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex flex-col items-center justify-center gap-2 bg-gray-100'>
+          <ImageIcon className='w-12 h-12 text-gray-400' strokeWidth={1.5} aria-hidden />
         </div>
       )
       }

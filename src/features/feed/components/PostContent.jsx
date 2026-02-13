@@ -2,7 +2,7 @@
 import React from 'react'
 import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
-const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, compact, feed = false, className = '' }) => {
+const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, compact, feed = false, truncate = true, className = '' }) => {
     if (!postDetail && (!hashTag || hashTag.length === 0)) {
         return null
     }
@@ -35,9 +35,9 @@ const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, co
                 )}
                 {postDetail && (
                     <div
-                        className={`min-w-0 flex-1 line-clamp-2 font-[380] leading-[140%] tracking-normal break-words ${compact ? 'text-xs sm:text-sm' : 'text-xs sm:text-sm'}`}
+                        className={`min-w-0 flex-1 font-medium leading-[140%] tracking-normal break-words ${truncate ? 'line-clamp-2' : ''} ${compact ? 'text-xs sm:text-sm' : 'text-xs sm:text-sm'}`}
                         style={{ fontFamily: 'MiSansMU, sans-serif' }}
-                        title={postDetail}
+                        title={truncate ? postDetail : undefined}
                     >
                         {formatContentWithHashTags(postDetail)}
                     </div>

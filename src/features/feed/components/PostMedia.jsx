@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import { Image as ImageIcon } from 'lucide-react'
 
 const PostMedia = ({ images, typeImg, backgroundImage, postDetail, isFirstPost = false }) => {
   // ถ้า typeImg เป็น true แสดง images
@@ -76,8 +77,12 @@ const PostMedia = ({ images, typeImg, backgroundImage, postDetail, isFirstPost =
     )
   }
 
-  // ไม่มี media
-  return null
+  // ไม่มี media - แสดง skeleton สำหรับหน้าโพสต์เดี่ยว
+  return (
+    <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-xl flex flex-col items-center justify-center gap-2 bg-gray-100 animate-shimmer'>
+      <ImageIcon className='w-12 h-12 text-gray-400' strokeWidth={1.5} aria-hidden />
+    </div>
+  )
 }
 
 export default PostMedia
