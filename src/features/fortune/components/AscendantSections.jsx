@@ -16,7 +16,7 @@ const AscendantSections = () => {
                         ลัคนาราศี
                     </h2>
                     {/* รูประหว่างหัวข้อกับข้อความ — แสดงเมื่อต่ำกว่า lg เท่านั้น */}
-                    <div className="relative mb-6 flex min-h-[260px] w-full items-center justify-center sm:min-h-[300px] sm:mb-8 md:min-h-[360px] lg:mb-0 lg:min-h-0 lg:hidden">
+                    <div className="relative mb-6 flex w-full items-center justify-center sm:mb-8 lg:mb-0 lg:hidden">
                         <div className="relative aspect-square w-full max-w-[280px] drop-shadow-md sm:max-w-[320px] md:max-w-[380px]">
                             <Image
                                 src="/img/ascendant.svg"
@@ -41,7 +41,7 @@ const AscendantSections = () => {
                 </div>
 
                 {/* ขวา: แผนภาพดวง — แสดงเฉพาะ lg ขึ้นไป, ต่ำกว่า lg ซ่อน (ใช้รูประหว่างหัวข้อกับข้อความแทน) */}
-                <div className="relative hidden min-h-[260px] items-center justify-center sm:min-h-[300px] md:min-h-[360px] lg:flex lg:min-h-[420px]">
+                <div className="relative hidden items-center justify-center lg:flex">
                     <div className="relative aspect-square w-full max-w-[280px] drop-shadow-md sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px]">
                         <Image
                             src="/img/ascendant.svg"

@@ -30,7 +30,7 @@ const page = () => {
         <div className="relative  bg-mu-purple mx-auto overflow-hidden">
             {/* <ScrollToTopOnLoad /> */}
             {/* Overlay ดาว 4 แฉก (CSS) */}
-            <div className="pointer-events-none fixed top-0 z-0 h-screen min-h-[400px] w-full">
+            <div className="pointer-events-none fixed top-0 z-0 h-screen w-full">
                 <StarOverlay />
             </div>
 

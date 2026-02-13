@@ -29,7 +29,7 @@ const SoulmateHoroscope = () => {
         </div>
 
         {/* ขวา: แสดงรูป soulmate ชิดขวา (วง 90% + heart lock) */}
-        <div className="relative flex min-h-[280px] items-center justify-end sm:min-h-[320px]">
+        <div className="relative flex items-center justify-end">
           <div className="relative flex items-center justify-end gap-4 sm:gap-6">
             {/* รูป soulmate — ขวามือ แสดงรูปแบบนี้ */}
             <div className="relative h-[180px] w-[240px] shrink-0 sm:h-[200px] sm:w-[280px] md:h-[220px] md:w-[320px]">

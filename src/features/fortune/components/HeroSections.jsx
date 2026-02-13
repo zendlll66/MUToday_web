@@ -6,7 +6,7 @@ import AstroAnimations from './AstroAnimations'
 
 export const HeroSections = () => {
   return (
-    <section className="relative grid min-h-[70vh] w-full grid-cols-1 items-center gap-8  px-4 py-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12 lg:px-8 lg:py-14">
+    <section className="relative grid  w-full grid-cols-1 items-center gap-8  px-4 py-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12 lg:px-8 lg:py-14">
       {/* Left: Branding + CTA */}
       <div className="flex flex-col items-center lg:items-start justify-center px-0 lg:px-4">
         <div className="mb-6 flex items-center gap-2">
@@ -60,7 +60,7 @@ export const HeroSections = () => {
       </div>
 
       {/* Right: Astro chart / animation */}
-      <div className="relative flex min-h-[320px] items-center justify-center lg:min-h-[480px]">
+      <div className="relative flex items-center justify-center">
         <AstroAnimations />
       </div>
     </section>

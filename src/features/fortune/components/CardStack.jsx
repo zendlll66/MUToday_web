@@ -500,7 +500,7 @@ export const CardStack = ({
   )
 
   return (
-    <div className="relative flex justify-center items-center min-h-[50vh] w-full py-4 overflow-hidden pl-12">
+    <div className="relative flex justify-center items-center w-full py-4 overflow-hidden pl-12">
       <div
         className="relative z-[2] flex items-center justify-center py-4 mx-auto origin-center -ml-12"
         style={{

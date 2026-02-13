@@ -103,7 +103,7 @@ const WallpaperSections = () => {
 
         {/* แถบการ์ด: กลางใหญ่สุด ค่อยๆ เล็กลงซ้ายขวา กลางอยู่บนสุด (z-index สูงสุด) */}
         <div
-          className="daily-horoscope-clipped flex min-h-[80vh] flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
+          className="daily-horoscope-clipped flex flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
         >
           <div>
             {/* Header */}
