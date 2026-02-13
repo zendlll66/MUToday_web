@@ -227,7 +227,7 @@ export default function PostComments({ postId, totalCount: initialTotalCount, cl
   }
 
   return (
-    <section className={` w-full ${className}`}>
+    <section className={` w-full ${className} ml-6 md:ml-0`}>
       <h3 className="text-xs sm:text-sm font-medium text-[#777777] mb-2">
         {totalCount} ความคิดเห็น
       </h3>
