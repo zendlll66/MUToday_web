@@ -20,8 +20,11 @@ const TermsPage = () => {
     <section className="relative w-full" aria-label="ข้อกำหนดและเงื่อนไข">
       <div className='flex flex-col justify-center items-center mt-20'>
         <h1 className="text-2xl sm:text-3xl font-bold text-mu-text mb-2">
-          Terms and Condition
+          ข้อกำหนดและเงื่อนไขการใช้บริการ
         </h1>
+        <div className='absolute top-50 '>
+          <ConcentricGlow star={false} />
+        </div>
       </div>
       {/* clipPath ขอบเว้า (ใช้ class เดียวกับ DailyHoroscopeSection) */}
       <svg width={0} height={0} className="absolute " aria-hidden>
@@ -39,10 +42,11 @@ const TermsPage = () => {
         </defs>
       </svg>
 
-      <div className="daily-horoscope-clipped mt-[-100px] flex flex-col drop-shadow-lg shadow-2xs bg-[#F4F3FF] py-10 sm:py-12 pb-20">
-        <article className="terms-page w-full max-w-3xl mx-auto px-4">
+      <div className="daily-horoscope-clipped mt-[-50px] flex flex-col drop-shadow-lg shadow-2xs bg-[#F4F3FF] py-10 sm:py-12 pb-20">
+        <article className="terms-page w-full container mx-auto px-4">
           <div className="prose mt-25 prose-neutral max-w-none text-mu-text/90 space-y-6 text-sm sm:text-base leading-relaxed">
-            <p className="text-sm text-mu-text/80 mb-6">ฉบับปรับปรุงวันที่ 14 กุมภาพันธ์ 2569</p>
+            <h2 className='text-lg font-semibold text-mu-text mt-8 mb-3'>Terms and Condition</h2>
+            <p className="text-sm text-mu-text/80 mb-2">ฉบับปรับปรุงวันที่ 14 กุมภาพันธ์ 2569</p>
             <p>
               การเข้าถึงหรือใช้บริการแอปพลิเคชัน MUToday ภายใต้การควบคุมดูแลของ บริษัท มูทูเดย์ จำกัด (บริษัทฯ) หมายถึงท่าน (ผู้ใช้บริการ) ยอมรับข้อกำหนดและเงื่อนไขการใช้บริการนี้ บนระบบปฏิบัติการไอโอเอส (&quot;iOS&quot;) และบนระบบปฏิบัติการแอนดรอยด์ (&quot;Android&quot;) ซึ่งประกอบด้วยข้อกำหนดและเงื่อนไขด้านล่าง พร้อมกับเงื่อนไขที่กำหนดไว้ในนโยบายความเป็นส่วนตัว ภายใต้ข้อกำหนดและเงื่อนไขการใช้บริการต่อไปนี้ ขอให้ท่านอ่านข้อกำหนดและเงื่อนไขการใช้บริการที่กำหนดไว้อย่างละเอียด การที่ท่านใช้บริการนี้ ถือว่าท่านตกลงและยอมรับข้อผูกพันทางกฎหมายที่ระบุไว้ในข้อกำหนดและเงื่อนไขการใช้บริการ รวมถึงนโยบายความเป็นส่วนตัวที่บริษัทได้กำหนดไว้ด้วย
             </p>
