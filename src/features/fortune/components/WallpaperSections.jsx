@@ -99,20 +99,18 @@ const WallpaperSections = () => {
         <ConcentricGlow />
       </div>
       <div className="mx-auto">
-
-
         {/* แถบการ์ด: กลางใหญ่สุด ค่อยๆ เล็กลงซ้ายขวา กลางอยู่บนสุด (z-index สูงสุด) */}
         <div
           className="daily-horoscope-clipped flex flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
         >
           <div>
             {/* Header */}
-            <header className="mb-8 text-center sm:mb-10">
+            <header className="mb-8 text-center lg:mt-10 mt-5 sm:mb-10">
               <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
                 วอลเปเปอร์มงคล
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#5C4B9E]/90 sm:text-base">
-                วอลเปเปอร์มงคลเฉพาะบุคคล ออกแบบตามพลังดวงและคำทำนายของคุณ
+                วอลเปเปอร์มงคลเฉพาะบุคคล ออกแบบตามพลังดวงและคำทำนายของคุณ <br />
                 เพื่อเสริมพลังชีวิต โชคลาภ และความราบรื่นในทุกวัน
               </p>
             </header>

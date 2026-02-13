@@ -64,10 +64,10 @@ const DailyHoroscopeSection = () => {
         <ConcentricGlow />
       </div>
       <div
-        className="daily-horoscope-clipped flex flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
+        className="daily-horoscope-clipped flex flex-col drop-shadow-lg shadow-2xs items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
       >
         {/* ซ้าย: รูปแอป */}
-        <div className="flex flex-col items-center lg:flex-1">
+        <div className="flex flex-col items-center lg:flex-1 lg:items-end lg:justify-center">
           <Image
             src="/img/app.svg"
             alt="แอปทำนายวันนี้"
