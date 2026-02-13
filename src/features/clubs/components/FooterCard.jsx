@@ -1,11 +1,17 @@
+'use client'
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const FooterCard = ({ user, createdAt, isOwner, isFirstPost = false, postId, countLike, countComment }) => {
+    const [imgError, setImgError] = useState(false)
+
     if (!user) {
         return null
     }
+
+    const hasProfileImg = user.imgProfile && !imgError
 
     const handleLike = (e) => {
         e?.stopPropagation?.()
@@ -27,14 +33,19 @@ const FooterCard = ({ user, createdAt, isOwner, isFirstPost = false, postId, cou
     return (
         <div className='flex items-center gap-2 sm:gap-3'>
             <div className='relative w-[30px] h-[30px] rounded-full overflow-hidden shrink-0'>
-                <Image
-                    src={user.imgProfile || '/default-avatar.png'}
-                    alt={user.displayName || 'User'}
-                    fill
-                    className='object-cover'
-                    sizes='30px'
-                    priority={isFirstPost}
-                />
+                {hasProfileImg ? (
+                    <Image
+                        src={user.imgProfile}
+                        alt={user.displayName || 'User'}
+                        fill
+                        className='object-cover'
+                        sizes='30px'
+                        priority={isFirstPost}
+                        onError={() => setImgError(true)}
+                    />
+                ) : (
+                    <div className='absolute inset-0 rounded-full bg-gray-200 animate-shimmer' aria-hidden />
+                )}
             </div>
             <div className='flex-1 flex row items-center justify-between min-w-0'>
                 <div className='flex items-center gap-2'>
