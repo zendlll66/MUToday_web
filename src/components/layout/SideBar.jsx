@@ -181,9 +181,9 @@ const SideBar = () => {
       </aside>
 
       {/* Desktop Sidebar - Full */}
-      <aside className="hidden lg:flex fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-200 z-40 overflow-y-auto flex-col">
+      <aside className="hidden lg:flex fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-200 z-40 flex-col">
         {/* Logo Section */}
-        <div className="p-6">
+        <div className="p-6 shrink-0">
           <Link href="/" className="flex flex-col gap-1 items-start">
             <Image
               src="/icons/logo05.svg"
@@ -195,8 +195,8 @@ const SideBar = () => {
           </Link>
         </div>
 
-        {/* Navigation Menu */}
-        <nav className="px-4 pb-4">
+        {/* Navigation Menu - เลื่อนได้ถ้าเนื้อหายาว */}
+        <nav className="px-4 pb-4 flex-1 min-h-0 overflow-y-auto">
           {menuItems.map((item) => {
             const isActive = !item.isShare && pathname === item.href
             if (item.isShare) {
@@ -227,50 +227,49 @@ const SideBar = () => {
           })}
         </nav>
 
-        {/* QR Code Section */}
-        <div className="px-4 py-6 mt-8">
-          <p className="text-center text-sm text-gray-700 mb-4">สแกนเพื่อดาวน์โหลดแอป</p>
-          <div className="flex justify-center">
-            <div className="bg-white p-4 rounded-xl shadow-md  border-[0.5px] border-black/10">
-              <div className="relative w-40 h-40">
-                <Image
-                  src="/icons/qr.svg"
-                  alt="QR Code"
-                  width={160}
-                  height={160}
-                  className="w-full h-full"
-                />
-                {/* Logo in center */}
-                <div className="absolute inset-0 flex items-center justify-center">
+        {/* QR อยู่บน, Footer ชิดล่างสุด */}
+        <div className="mt-auto flex flex-col shrink-0">
+          <div className="px-4 py-6">
+            <p className="text-center text-sm text-gray-700 mb-4">สแกนเพื่อดาวน์โหลดแอป</p>
+            <div className="flex justify-center">
+              <div className="bg-white p-4 rounded-xl shadow-md border-[0.5px] border-black/10">
+                <div className="relative w-40 h-40">
                   <Image
-                    src="/icons/logo02.svg"
-                    alt="MUToday Logo"
-                    width={16}
-                    height={16}
-                    className="w-4 h-4"
+                    src="/icons/qr.svg"
+                    alt="QR Code"
+                    width={160}
+                    height={160}
+                    className="w-full h-full"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Image
+                      src="/icons/logo02.svg"
+                      alt="MUToday Logo"
+                      width={16}
+                      height={16}
+                      className="w-4 h-4"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Footer Links */}
-        <div className="px-6 pb-6 mt-auto flex items-start">
-          <div className="text-start space-y-2">
-            <Link
-              href="/terms"
-              className="block text-xs text-black hover:text-gray-600 transition-colors"
-            >
-              ข้อกำหนดการใช้งาน
-            </Link>
-            <Link
-              href="/privacy"
-              className="block text-xs text-black hover:text-gray-600 transition-colors"
-            >
-              นโยบายความเป็นส่วนตัว
-            </Link>
-            <p className="text-[10px] text-gray-400 mt-4">© 2026 MUToday. All Rights Reserved</p>
+          <div className="px-6 pb-6 flex items-start">
+            <div className="text-start space-y-2">
+              <Link
+                href="/terms"
+                className="block text-xs text-black hover:text-gray-600 transition-colors"
+              >
+                ข้อกำหนดการใช้งาน
+              </Link>
+              <Link
+                href="/privacy"
+                className="block text-xs text-black hover:text-gray-600 transition-colors"
+              >
+                นโยบายความเป็นส่วนตัว
+              </Link>
+              <p className="text-[10px] text-gray-400 mt-4">© 2026 MUToday. All Rights Reserved</p>
+            </div>
           </div>
         </div>
       </aside>
