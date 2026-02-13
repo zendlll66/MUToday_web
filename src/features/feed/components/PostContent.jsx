@@ -27,20 +27,17 @@ const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, co
 
     return (
         <div className={` space-y-2 ${className}`}>
-            <div className='flex flex-row gap-2'>
+            <div
+                className={`leading-[140%] tracking-normal break-words whitespace-pre-wrap ${truncate ? 'line-clamp-2' : ''} ${compact ? 'text-xs sm:text-sm' : 'text-xs sm:text-sm'}`}
+                style={{ fontFamily: 'MiSansMU, sans-serif' }}
+                title={truncate ? postDetail : undefined}
+            >
                 {user?.displayName && !feed && (
-                    <div className={`font-semibold mb-1 ${compact ? 'text-xs sm:text-sm' : 'text-sm'}`} >
-                        {user.displayName}
-                    </div>
+                    <span className='font-semibold shrink-0'>{user.displayName}</span>
                 )}
+                {user?.displayName && !feed && postDetail && '\u00A0'}
                 {postDetail && (
-                    <div
-                        className={`min-w-0 flex-1 font-medium leading-[140%] tracking-normal break-words ${truncate ? 'line-clamp-2' : ''} ${compact ? 'text-xs sm:text-sm' : 'text-xs sm:text-sm'}`}
-                        style={{ fontFamily: 'MiSansMU, sans-serif' }}
-                        title={truncate ? postDetail : undefined}
-                    >
-                        {formatContentWithHashTags(postDetail)}
-                    </div>
+                    <span className='font-medium inline'>{formatContentWithHashTags(postDetail)}</span>
                 )}
             </div>
 
