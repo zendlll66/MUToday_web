@@ -58,13 +58,10 @@ export const highlightHashTags = (text, hashTags = [], textColor = '#000000') =>
     return <span style={{ color: textColor }}>{text}</span>
   }
 
-  // สร้าง regex pattern จาก hashTags array รวม # ด้วย
-  // Escape special characters และรวมเป็น pattern
+  // สร้าง regex pattern จาก hashTags array - highlight เฉพาะเมื่อมี # นำหน้า (ไม่ match คำเดียวกันที่อยู่กลางประโยค)
   const patterns = hashTags.map(tag => {
-    // Escape special regex characters
     const escapedTag = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    // Match ทั้ง #tag และ tag (ถ้ามี # อยู่หน้า)
-    return `#?${escapedTag}`
+    return `#${escapedTag}`
   })
 
   // สร้าง regex pattern ที่ match คำทั้งหมด (case-insensitive)
