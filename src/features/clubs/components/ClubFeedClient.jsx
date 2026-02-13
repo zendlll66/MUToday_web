@@ -7,12 +7,12 @@ import SearchAPI from '@/lib/api/enpoints/search.api'
 import ClubContentClient from './ClubContentClient'
 import MasonryCardSkeleton from './MasonryCardSkeleton'
 
-const ClubFeedClient = () => {
+const ClubFeedClient = ({ keywordOverride }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const handlePostClick = (postId) => router.push(`/post/${postId}`)
   const selectedTopic = useTopicStore((s) => s.selectedTopic)
-  const searchKeyword = (searchParams.get('q') ?? '').trim()
+  const searchKeyword = (keywordOverride ?? (searchParams.get('q') ?? '').trim()).trim()
   const isSearchMode = searchKeyword.length > 0
   const [feedData, setFeedData] = useState(null)
   const [loading, setLoading] = useState(true)

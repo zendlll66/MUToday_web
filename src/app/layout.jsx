@@ -3,7 +3,7 @@ import SideBar from "@/components/layout/SideBar";
 import TokenInit from "@/components/TokenInit";
 
 // รูปแชร์ต้องเป็น PNG/JPEG/WebP — โซเชียลไม่ใช้ SVG (จึงไม่ใช้ logo01.svg)
-const ogImageUrl = process.env.NEXT_PUBLIC_OG_IMAGE || '/icons/og-logo.png'
+const ogImageUrl = process.env.NEXT_PUBLIC_OG_IMAGE || '/cover.jpg'
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SHARE_URL || 'https://mu-today-web.vercel.app'),
@@ -18,7 +18,7 @@ export const metadata = {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: 'Mutoday Logo',
+        alt: 'Mutoday - มูทูเดย์ เทคโนโลยีพยากรณ์',
       },
     ],
     locale: 'th_TH',
