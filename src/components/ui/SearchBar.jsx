@@ -1,8 +1,9 @@
 "use client"
-import React from 'react'
-
+import React, { useRef } from 'react'
 
 const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '', defaultValue = '' }) => {
+    const formRef = useRef(null)
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -12,12 +13,23 @@ const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '', 
         }
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            formRef.current?.requestSubmit()
+        }
+    }
+
     return (
-        <form onSubmit={handleSubmit} className={`w-full ${className}`}>
+        <form ref={formRef} onSubmit={handleSubmit} className={`w-full ${className}`}>
             <div className="relative w-full flex items-center">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                <button
+                    type="submit"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-1 rounded-md text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer"
+                    aria-label="ค้นหา"
+                >
                     <svg
-                        className="w-5 h-5 text-gray-400"
+                        className="w-5 h-5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -30,16 +42,16 @@ const SearchBar = ({ placeholder = 'ค้นหา', onSearch, className = '', 
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                         />
                     </svg>
-                </div>
+                </button>
                 <input
                     type="text"
                     name="search"
                     defaultValue={defaultValue}
                     placeholder={placeholder}
-                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:bg-white focus:border-purple-300 focus:ring-2 focus:ring-purple-100 outline-none transition-all"
+                    onKeyDown={handleKeyDown}
+                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:bg-white outline-none transition-all"
                 />
             </div>
-
         </form>
     )
 }
