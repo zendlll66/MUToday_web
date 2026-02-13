@@ -4,7 +4,24 @@ import React from 'react'
 import Image from 'next/image'
 import AstroAnimations from './AstroAnimations'
 
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sevensolutions.mutoday&pli=1'
+const APP_STORE_URL = 'https://apps.apple.com/th/app/mutoday-astrology/id6475958471'
+const WEB_URL = 'https://mutoday.com'
+
+const getStoreUrlByDevice = () => {
+  if (typeof window === 'undefined') return WEB_URL
+  const userAgent = navigator.userAgent || navigator.vendor || (window.opera ?? '')
+  if (/android/i.test(userAgent)) return GOOGLE_PLAY_URL
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return APP_STORE_URL
+  return WEB_URL
+}
+
 export const HeroSections = () => {
+  const handleDownload = (e) => {
+    e.preventDefault()
+    window.location.href = getStoreUrlByDevice()
+  }
+
   return (
     <section className="relative grid  w-full grid-cols-1 items-center gap-8  px-4 py-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12 lg:px-8 lg:py-14">
       {/* Left: Branding + CTA */}
@@ -31,9 +48,10 @@ export const HeroSections = () => {
 
         <div className="flex flex-row mt-2 items-center justify-center gap-3">
           <a
-            href="#"
+            href={APP_STORE_URL}
+            onClick={handleDownload}
             className="relative inline-flex h-11 min-w-[170px] items-center justify-center gap-2.5 overflow-hidden rounded-full bg-[#4727C7] px-6 py-4 text-white whitespace-nowrap shadow-[1px_1px_1px_0_rgba(255,255,255,0.4)_inset,-1px_-1px_1px_0_rgba(255,255,255,0.25)_inset,-1px_-1px_1px_0_rgba(178,178,178,0.4)_inset,1px_1px_4px_0_rgba(255,255,255,0.6)_inset] transition hover:opacity-95"
-            aria-label="ดาวน์โหลดจาก Google Play"
+            aria-label="ดาวน์โหลดจาก App Store"
           >
             {/* Overlay จาก overlay-btn.svg */}
             <span className="pointer-events-none absolute inset-0 opacity-40 rounded-full overflow-hidden" aria-hidden>
@@ -51,7 +69,8 @@ export const HeroSections = () => {
           </a>
 
           <a
-            href="#"
+            href={GOOGLE_PLAY_URL}
+            onClick={handleDownload}
             className="relative inline-flex h-11 min-w-[170px] items-center justify-center gap-2.5 overflow-hidden rounded-full bg-[#4727C7] px-6 py-4 text-white whitespace-nowrap shadow-[1px_1px_1px_0_rgba(255,255,255,0.4)_inset,-1px_-1px_1px_0_rgba(255,255,255,0.25)_inset,-1px_-1px_1px_0_rgba(178,178,178,0.4)_inset,1px_1px_4px_0_rgba(255,255,255,0.6)_inset] transition hover:opacity-95"
             aria-label="ดาวน์โหลดจาก Google Play"
           >

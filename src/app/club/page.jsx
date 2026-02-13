@@ -20,7 +20,7 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div className='w-full max-w-[810px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 text-black min-h-screen bg-gray-50/50'>
+    <div className='w-full max-w-[810px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 text-black min-h-screen'>
       <h1 className='sr-only'>คลับสายมู ชุมชนโพสต์ทำนาย ดวง โหราศาสตร์ และความเชื่อ</h1>
       <Suspense fallback={null}>
         <div className='flex flex-col items-center justify-center mb-6'>
