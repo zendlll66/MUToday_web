@@ -1,12 +1,13 @@
 "use client"
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import PostContent from '@/features/feed/components/PostContent'
 import FooterCard from './FooterCard'
 import PostHeader from '@/features/feed/components/PostHeader'
 import { formatHashtagsInText, highlightHashTags } from '@/lib/textHelpers'
 
 const PLACEHOLDER_SINGLE = (
-  <div className='w-full aspect-square min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center bg-gray-100'>
+  <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center bg-gray-100'>
     <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
   </div>
 )
@@ -17,7 +18,7 @@ const PLACEHOLDER_CELL = (
   </div>
 )
 
-const MasonryCard = ({ data, onPostClick }) => {
+const MasonryCard = ({ data, onPostClick, priority = false }) => {
   const [singleImageError, setSingleImageError] = useState(false)
   const [failedGridIndices, setFailedGridIndices] = useState({})
 
@@ -79,12 +80,15 @@ const MasonryCard = ({ data, onPostClick }) => {
                 return PLACEHOLDER_SINGLE
               }
               return (
-                <div className='relative w-full min-w-0 [container-type:inline-size]'>
-                  <img
+                <div className='relative w-full min-w-0 aspect-4/5 rounded-lg sm:rounded-[20px] md:rounded-[24px] overflow-hidden bg-gray-100'>
+                  <Image
                     src={src}
                     alt='Post image'
-                    className='w-full h-auto max-h-[125cqw] sm:max-h-[140cqw] md:max-h-[160cqw] rounded-lg sm:rounded-[20px] md:rounded-[24px] object-cover object-top'
-                    loading='lazy'
+                    fill
+                    sizes='(max-width: 640px) 50vw, (max-width: 768px) 50vw, 400px'
+                    className='object-cover object-top'
+                    loading={priority ? 'eager' : 'lazy'}
+                    fetchPriority={priority ? 'high' : 'auto'}
                     onError={() => setSingleImageError(true)}
                   />
                 </div>
@@ -104,11 +108,14 @@ const MasonryCard = ({ data, onPostClick }) => {
                   {showPlaceholder ? (
                     PLACEHOLDER_CELL
                   ) : (
-                    <img
+                    <Image
                       src={src}
                       alt={`Post image ${index + 1}`}
-                      className='w-full h-full object-cover'
-                      loading='lazy'
+                      fill
+                      sizes='(max-width: 640px) 25vw, (max-width: 768px) 25vw, 200px'
+                      className='object-cover'
+                      loading={priority && index === 0 ? 'eager' : 'lazy'}
+                      fetchPriority={priority && index === 0 ? 'high' : 'auto'}
                       onError={() => setFailedGridIndices((prev) => ({ ...prev, [index]: true }))}
                     />
                   )}
@@ -147,7 +154,7 @@ const MasonryCard = ({ data, onPostClick }) => {
           )}
         </div>
       ) : (
-        <div className='w-full aspect-[4/5] min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center'>
+        <div className='w-full aspect-4/5 min-h-[200px] rounded-lg sm:rounded-[20px] md:rounded-[24px] animate-shimmer flex items-center justify-center'>
           <span className='text-gray-400 text-sm'>ไม่มีรูป</span>
         </div>
       )

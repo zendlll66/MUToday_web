@@ -125,13 +125,18 @@ const HomePage = () => {
     }, [loadMore])
 
     const hasBanners = Array.isArray(bannerData) && bannerData.length > 0
+    const showBannerSlot = loading || hasBanners
 
     return (
         <>
             <h1 className="sr-only">Mutoday คลับสายมู ฟีดโพสต์จากชุมชน โหราศาสตร์ ดวง ทำนาย</h1>
-            {hasBanners && (
-                <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6'>
-                    <Banner banners={bannerData} />
+            {showBannerSlot && (
+                <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6 min-h-[100px] sm:min-h-[120px]'>
+                    {hasBanners ? (
+                        <Banner banners={bannerData} />
+                    ) : (
+                        <div className='w-full aspect-[9/3] max-h-[140px] rounded-lg sm:rounded-xl bg-gray-100 animate-shimmer' aria-hidden />
+                    )}
                 </div>
             )}
             <div className='w-full min-w-0 max-w-[810px] sm:max-w-[600px] md:max-w-[800px] mx-auto min-h-screen flex flex-col items-center py-4 px-4 sm:px-6 cursor-pointer'>

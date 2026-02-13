@@ -41,13 +41,13 @@ const PostCardMasonry = ({ data, onPostClick, loading = false }) => {
   return (
     <div className="w-full min-w-0 grid grid-cols-2 gap-1.5 sm:gap-4 md:gap-6">
       <div className="min-w-0 flex flex-col gap-1.5 sm:gap-4 md:gap-6">
-        {leftColumn.map((post) => (
-          <MasonryCard key={post.id} data={post} onPostClick={onPostClick} />
+        {leftColumn.map((post, idx) => (
+          <MasonryCard key={post.id} data={post} onPostClick={onPostClick} priority={idx === 0} />
         ))}
       </div>
       <div className="min-w-0 flex flex-col gap-1.5 sm:gap-4 md:gap-6">
-        {rightColumn.map((post) => (
-          <MasonryCard key={post.id} data={post} onPostClick={onPostClick} />
+        {rightColumn.map((post, idx) => (
+          <MasonryCard key={post.id} data={post} onPostClick={onPostClick} priority={idx === 0} />
         ))}
       </div>
     </div>
