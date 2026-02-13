@@ -5,7 +5,7 @@ const PURPLE = '130, 110, 210'
 const SIZES = [500, 600, 700, 800, 900, 1000, 1100] // diameter แต่ละชั้น
 const OPACITIES = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05] // วงใน → วงนอก
 
-const ConcentricGlow = ({ className = '', position = 'top' }) => {
+const ConcentricGlow = ({ className = '', position = 'top', star = true }) => {
   const isBottom = position === 'bottom'
 
   return (
@@ -29,12 +29,14 @@ const ConcentricGlow = ({ className = '', position = 'top' }) => {
           />
         )
       })}
-      {/* รูปดาวซ้อนด้านบน — ด้านล่างจะ flip ตาม container scale-y-[-1] */}
-      <img
-        src="/img/star-g.png"
-        alt=""
-        className="absolute  top-[-20%] inset-0 h-full w-full object-contain object-center opacity-90"
-      />
+      {star && (
+        <img
+          src="/img/star-g.png"
+          alt=""
+          className="absolute inset-0 m-auto h-auto  object-contain object-center opacity-90"
+          aria-hidden
+        />
+      )}
     </div>
   )
 }
