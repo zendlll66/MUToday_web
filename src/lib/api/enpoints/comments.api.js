@@ -66,8 +66,8 @@ const CommentsAPI = {
     const safeCommentId = String(commentId || '').replace(/"/g, '\\"')
     const safeCursor = String(cursor || '').replace(/"/g, '\\"')
     const input = cursor
-      ? `{ commentId: "${safeCommentId}", limit: ${Number(limit) || 10}, cursor: "${safeCursor}" }`
-      : `{ commentId: "${safeCommentId}", limit: ${Number(limit) || 10} }`
+      ? `{ commentIds: "${safeCommentId}", limit: ${Number(limit) || 10}, cursor: "${safeCursor}" }`
+      : `{ commentIds: "${safeCommentId}", limit: ${Number(limit) || 10} }`
     const query = `
       query {
         replyPublicByCommentIdV2(input: ${input}) {

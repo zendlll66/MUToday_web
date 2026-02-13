@@ -182,17 +182,6 @@ export default function PostComments({ postId, totalCount: initialTotalCount, cl
     }
   }, [])
 
-  // โหลด replies ของแต่ละ comment ที่มี countReply > 0 โดยใช้ comment.id วนเรียก getRepliesByCommentId
-  useEffect(() => {
-    if (comments.length === 0) return
-    comments.forEach((comment) => {
-      const countReply = Number(comment.countReply) || 0
-      if (countReply > 0) {
-        loadReplies(comment.id)
-      }
-    })
-  }, [comments, loadReplies])
-
   const loadMoreReplies = useCallback(async (commentId, cursor) => {
     if (!commentId || !cursor) return
     try {
