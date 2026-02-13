@@ -66,7 +66,7 @@ const Card = () => {
   return (
     <>
       {/* Header */}
-      <header className="text-center ">
+      <header className="text-center container mx-auto px-4 py-8 ">
         <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
           ไพ่ทาโรต์
         </h2>
@@ -75,7 +75,7 @@ const Card = () => {
           ผสมผสานเทคโนโลยีเอไอ อ่านความเชื่อมโยงของหน้าไพ่ พร้อมให้คุณตั้งคำถามได้ทุกเรื่องในชีวิต
         </p>
       </header>
-      <div ref={containerRef} className=" mt-[-100px] w-full" />
+      <div ref={containerRef} className="lg:mt-0 mt-[-50px] relative " />
     </>
   )
 

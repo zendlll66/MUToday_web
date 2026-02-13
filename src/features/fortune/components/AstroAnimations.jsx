@@ -34,7 +34,7 @@ const AstroAnimations = () => {
 
     return (
         <motion.div
-            className="absolute  lg:left-[10%] md:top-[10%] top-[10%] lg:top-[-30%] inline-block aspect-square w-[min(100vw,1080px)] md:w-[min(100vw,1080px)] lg:w-[min(50vw,1080px)] min-w-[320px]"
+            className="absolute  lg:left-[10%] md:top-[10%] top-[10%] lg:top-[-50%] inline-block aspect-square w-[min(100vw,1080px)] md:w-[min(100vw,1080px)] lg:w-[min(50vw,1080px)] min-w-[320px]"
             initial={{ opacity: 0, y: 12 }}
             animate={{
                 opacity: 1,

@@ -60,7 +60,7 @@ export const HeroSections = () => {
       </div>
 
       {/* Right: Astro chart / animation */}
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-[480px]">
         <AstroAnimations />
       </div>
     </section>

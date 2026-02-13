@@ -14,11 +14,12 @@ html, body {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  height: 300px;
 }
 
 .cards-stack {
   --overlap: 70px;
-  --stack-shift-x: -10%;
+  --stack-shift-x: 0%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,11 +33,34 @@ html, body {
     transform: scale(0.4) translateX(var(--stack-shift-x));
   }
 }
+
 @media (min-width: 1024px) {
   .cards-stack {
-    transform: scale(0.6) translateX(var(--stack-shift-x));
+    --stack-shift-x: -0%;
   }
 }
+
+
+@media (min-width: 100px) {
+  .cards-stack {
+    transform: scale(0.3) translateX(var(--stack-shift-x));
+  }
+}
+
+@media (min-width: 768px) {
+  .cards-stack {
+    --stack-shift-x: -5%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-stack {
+    --stack-shift-x: -15%;
+    transform: scale(0.4) translateX(var(--stack-shift-x));
+  }
+}
+
+
 
 .cards-stack .card-3d {
   margin-left: calc(-1 * var(--overlap));

@@ -38,11 +38,11 @@ const page = () => {
                 <HeroSections />
             </div>
 
-            <div className="relative z-10">    
+            <div className="relative z-10 mt-[-200px] lg:my-[-50px]">    
                 <DailyHoroscopeSection />
             </div>
 
-            <div className="relative z-10  ">    
+            <div className="relative z-10   ">    
                 <AscendantSections />
             </div>
 
