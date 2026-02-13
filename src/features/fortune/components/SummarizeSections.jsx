@@ -11,14 +11,14 @@ const SummarizeSections = () => {
     >
       <div className="container mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-10 md:gap-12 md:grid-cols-[1fr_1.1fr] lg:gap-16">
         {/* ซ้าย: รูปมือถือ */}
-        <div className="relative flex justify-center lg:justify-end">
+        <div className="relative  mt-20 md:mr-[-160px] lg:mr-[-200px] mb-20 flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[380px] drop-shadow-xl sm:max-w-[440px] lg:max-w-[520px]">
             <Image
               src="/img/phone-fortune.svg"
               alt="แอปมูทูเดย์ - รายการศาสตร์แห่งศรัทธา"
               width={520}
               height={1040}
-              className="w-full h-auto object-contain lg:scale-180 scale-130"
+              className="w-full h-auto object-contain md:scale-180 max-w-[400px] scale-130"
             />
           </div>
         </div>

@@ -78,9 +78,9 @@ const DailyHoroscopeSection = () => {
         </div>
 
         {/* ขวา: หัวข้อ + รายการฟีเจอร์ (อยู่ข้างรูป) */}
-        <div className="mt-8 w-full mx-auto justify-center items-center lg:items-start max-w-md lg:mt-0 lg:flex-1 md:pb-20 lg:max-w-none">
+        <div className="mt-8 mb-8 w-full mx-auto justify-center items-center lg:items-start max-w-md lg:mt-8 lg:flex-1 md:pb-20 lg:max-w-none">
           <h2 className="mb-2 text-2xl font-bold text-mu-text sm:text-3xl text-center lg:text-left">ดวงรายวัน</h2>
-          <p className="mb-6  text-sm text-mu-text/80 sm:mb-8 sm:text-base text-center lg:mx-0 lg:text-left max-w-[230px] mx-auto">
+          <p className="mb-6   text-sm text-mu-text/80 sm:mb-8 sm:text-base text-center lg:mx-0 lg:text-left max-w-[230px] mx-auto">
             อัปเดตพลังดวงในแต่ละวัน เพื่อให้คุณใช้ชีวิตได้ตรงจังหวะที่สุด
           </p>
           <ul className="flex flex-col gap-2 justify-center w-fit items-start lg:items-start mx-auto lg:mx-0">
