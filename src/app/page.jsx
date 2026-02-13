@@ -128,6 +128,7 @@ const HomePage = () => {
 
     return (
         <>
+            <h1 className="sr-only">Mutoday คลับสายมู ฟีดโพสต์จากชุมชน โหราศาสตร์ ดวง ทำนาย</h1>
             {hasBanners && (
                 <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6'>
                     <Banner banners={bannerData} />

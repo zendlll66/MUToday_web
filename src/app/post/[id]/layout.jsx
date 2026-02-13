@@ -1,4 +1,5 @@
 import PostsAPI from '@/lib/api/enpoints/posts.api'
+import { getCanonicalUrl } from '@/config/seo'
 
 export async function generateMetadata({ params }) {
     const resolved = typeof params?.then === 'function' ? await params : params
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }) {
                 ? (post.postDetail || '').slice(0, 160)
                 : `โพสต์จาก ${post.user?.displayName || 'Mutoday'} ในชุมชน Mutoday`
             const ogImage = post.images?.[0]?.img || post.backgroundImage?.img || process.env.NEXT_PUBLIC_OG_IMAGE
-            const ogUrl = `https://mu-today-web.vercel.app/post/${id}`
+            const ogUrl = getCanonicalUrl(`post/${id}`)
             return {
                 title,
                 description,

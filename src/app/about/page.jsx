@@ -2,6 +2,21 @@ import CardAbount from '@/features/about/components/CardAbount'
 import CardContact from '@/features/about/components/CardContact'
 import Accordion from '@/components/ui/Accordion'
 import CircularGradientBg from '@/components/ui/CircularGradientBg'
+import { getCanonicalUrl } from '@/config/seo'
+
+export const metadata = {
+  title: 'เกี่ยวกับมูทูเดย์ | Mutoday',
+  description:
+    'มูทูเดย์ แพลตฟอร์มดูดวงและโหราศาสตร์ คลับสายมู ชุมชนโพสต์ทำนาย ดวง ทาโรต์ ฮวงจุ้ย คำถามที่พบบ่อยและติดต่อเรา',
+  openGraph: {
+    title: 'เกี่ยวกับมูทูเดย์ | Mutoday',
+    description:
+      'มูทูเดย์ แพลตฟอร์มดูดวงและโหราศาสตร์ คลับสายมู ชุมชนโพสต์ทำนาย ดวง ทาโรต์ ฮวงจุ้ย',
+    url: getCanonicalUrl('about'),
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image', title: 'เกี่ยวกับมูทูเดย์ | Mutoday' },
+}
 
 const page = () => {
     const faqData = [

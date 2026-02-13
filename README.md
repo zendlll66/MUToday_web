@@ -43,6 +43,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 | `NEXT_PUBLIC_SHARE_URL` | URL หลักของแอป (fallback เมื่อไม่มี window) |
 | `NEXT_PUBLIC_FB_APP_ID` | Facebook App ID สำหรับแชร์ผ่าน Messenger |
 | `NEXT_PUBLIC_OG_IMAGE` | URL รูปสำหรับแชร์ (Open Graph / Twitter Card) — ต้องเป็น **PNG หรือ JPEG** (โซเชียลไม่ใช้ SVG) แนะนำขนาด 1200×630 px |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | (เลือกใช้) Google Analytics 4 Measurement ID สำหรับติดตามการใช้งาน |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | (เลือกใช้) รหัสยืนยันตัวตนจาก Google Search Console สำหรับการ index และดูสถิติ SEO |
 
 **หมายเหตุ:** ถ้าไม่ตั้ง `NEXT_PUBLIC_OG_IMAGE` จะใช้ `/icons/og-logo.png` — ควรมีไฟล์ `public/icons/og-logo.png` (โลโก้เป็น PNG) เพื่อให้แชร์ขึ้นรูปโลโก้ ไม่ใช่รูป banner จากหน้า
 
@@ -53,4 +55,7 @@ NEXT_PUBLIC_SHARE_TEXT=คลับสายมู แชร์โพสต์ �
 NEXT_PUBLIC_SHARE_URL=https://mu-today-web.vercel.app
 NEXT_PUBLIC_FB_APP_ID=87741124305
 NEXT_PUBLIC_OG_IMAGE=https://mutoday.com/icons/og-logo.png
+# SEO (optional)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```

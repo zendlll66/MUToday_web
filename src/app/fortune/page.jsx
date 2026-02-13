@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 
+import { getCanonicalUrl } from '@/config/seo'
 import { HeroSections } from '@/features/fortune/components/HeroSections'
 import { ScrollToTopOnLoad } from '@/features/fortune/components/ScrollToTopOnLoad'
 import { StarOverlay } from '@/features/fortune/components/StarOverlay'
@@ -9,6 +10,20 @@ import WallpaperSections from '@/features/fortune/components/WallpaperSections'
 import SummarizeSections from '@/features/fortune/components/SummarizeSections'
 import SoulmateHoroscope from '@/features/fortune/components/SoulmateHoroscope'
 import Card from '@/features/fortune/components/Card'
+
+export const metadata = {
+  title: 'ดวงรายวัน ดูดวง โหราศาสตร์ | Mutoday',
+  description:
+    'ดวงรายวัน ดูดวง ราศี ลัคนา วอลเปเปอร์สายมู คู่รักดวงดาว มูทูเดย์ ชุมชนคนสายมู ดาวน์โหลดแอปดูดวง',
+  openGraph: {
+    title: 'ดวงรายวัน ดูดวง โหราศาสตร์ | Mutoday',
+    description:
+      'ดวงรายวัน ดูดวง ราศี ลัคนา วอลเปเปอร์สายมู คู่รักดวงดาว มูทูเดย์ ชุมชนคนสายมู',
+    url: getCanonicalUrl('fortune'),
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image', title: 'ดวงรายวัน ดูดวง | Mutoday' },
+}
 
 const page = () => {
     return (

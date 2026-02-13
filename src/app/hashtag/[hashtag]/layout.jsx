@@ -1,3 +1,5 @@
+import { getCanonicalUrl } from '@/config/seo'
+
 export async function generateMetadata({ params }) {
   const resolved = typeof params?.then === 'function' ? await params : params
   const raw = resolved?.hashtag ?? ''
@@ -14,7 +16,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      url: `https://mutoday.com/hashtag/${encodeURIComponent(decoded)}`,
+      url: getCanonicalUrl(`hashtag/${encodeURIComponent(decoded)}`),
     },
     twitter: {
       card: 'summary',
