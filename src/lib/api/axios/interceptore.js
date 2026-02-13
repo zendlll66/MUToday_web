@@ -24,9 +24,17 @@ const setupInterceptors = () => {
             return response;
         },
         (error) => {
-            if (error && error.response && error.response.status === 401) {
+            const status = error?.response?.status;
+            if (status === 401 || status === 403) {
                 Token.remove();
-                console.log("Unauthorized");
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('token-invalid'));
+                    const reloadKey = 'auth-reload-once';
+                    if (!sessionStorage.getItem(reloadKey)) {
+                        sessionStorage.setItem(reloadKey, '1');
+                        window.location.reload();
+                    }
+                }
             }
             return Promise.reject(error);
         }
