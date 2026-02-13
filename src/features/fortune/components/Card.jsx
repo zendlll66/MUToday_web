@@ -1,8 +1,20 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { CardStack } from '@/components/CardStack'
 import '@/components/style.css'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+}
+
+const staggerContainer = {
+  animate: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
 
 const cardImages = [
   '/card/0.webp',
@@ -64,9 +76,18 @@ const Card = () => {
   }, [])
 
   return (
-    <>
+    <motion.div
+      variants={staggerContainer}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       {/* Header */}
-      <header className="text-center container mx-auto px-4 py-8 ">
+      <motion.header
+        className="text-center container mx-auto px-4 py-8 "
+        variants={fadeUp}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
         <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
           ไพ่ทาโรต์
         </h2>
@@ -74,9 +95,14 @@ const Card = () => {
           ศาตร์แห่งการทำนายที่มีความเป็นมากว่า 600 ปี นำสัญลักษณ์ดั้งเดิมมาปรับโฉมใหม่<br />
           ผสมผสานเทคโนโลยีเอไอ อ่านความเชื่อมโยงของหน้าไพ่ พร้อมให้คุณตั้งคำถามได้ทุกเรื่องในชีวิต
         </p>
-      </header>
-      <div ref={containerRef} className="lg:mt-0 mt-[-50px] relative " />
-    </>
+      </motion.header>
+      <motion.div
+        ref={containerRef}
+        className="lg:mt-0 mt-[-50px] relative "
+        variants={fadeUp}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      />
+    </motion.div>
   )
 
 

@@ -57,29 +57,29 @@ const shareOptions = [
       `https://www.facebook.com/share_channel/?type=reshare&link=${encodeURIComponent(DEFAULT_SHARE_URL)}&app_id=${FB_APP_ID}&source_surface=external_reshare&display=popup&hashtag#`,
     getAppUrl: () => `fb://facewebmodal/f?href=${encodeURIComponent('https://www.facebook.com/share_channel/?type=reshare&link=' + DEFAULT_SHARE_URL + '&app_id=' + FB_APP_ID)}`,
   },
-  {
-    id: 'instagram',
-    label: 'Instagram',
-    icon: '/social_icon/instagram.svg',
-    action: 'copyAndOpen',
-    copyAndOpenUrl: 'https://www.instagram.com/',
-    copyAndOpenAppUrl: 'instagram://app',
-  },
-  {
-    id: 'whatsapp',
-    label: 'WhatsApp',
-    icon: '/social_icon/weChat.svg',
-    getUrl: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
-    getAppUrl: () => `whatsapp://send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
-  },
-  {
-    id: 'tiktok',
-    label: 'TikTok',
-    icon: '/social_icon/tiktok.svg',
-    action: 'copyAndOpen',
-    copyAndOpenUrl: 'https://www.tiktok.com/',
-    copyAndOpenAppUrl: 'tiktok://',
-  },
+  // {
+  //   id: 'instagram',
+  //   label: 'Instagram',
+  //   icon: '/social_icon/instagram.svg',
+  //   action: 'copyAndOpen',
+  //   copyAndOpenUrl: 'https://www.instagram.com/',
+  //   copyAndOpenAppUrl: 'instagram://app',
+  // },
+  // {
+  //   id: 'whatsapp',
+  //   label: 'WhatsApp',
+  //   icon: '/social_icon/weChat.svg',
+  //   getUrl: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
+  //   getAppUrl: () => `whatsapp://send?text=${encodeURIComponent(DEFAULT_SHARE_TEXT + ' ' + getShareUrl())}`,
+  // },
+  // {
+  //   id: 'tiktok',
+  //   label: 'TikTok',
+  //   icon: '/social_icon/tiktok.svg',
+  //   action: 'copyAndOpen',
+  //   copyAndOpenUrl: 'https://www.tiktok.com/',
+  //   copyAndOpenAppUrl: 'tiktok://',
+  // },
 ]
 
 const ShareBottomSheet = ({ isOpen, onClose }) => {

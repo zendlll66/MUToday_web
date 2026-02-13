@@ -41,7 +41,8 @@ export const HeroSections = () => {
         className="flex flex-col items-center lg:items-start justify-center px-0 lg:px-4"
         variants={staggerContainer}
         initial="initial"
-        animate="animate"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
       >
         <motion.div
           className="mb-6 flex items-center gap-2"

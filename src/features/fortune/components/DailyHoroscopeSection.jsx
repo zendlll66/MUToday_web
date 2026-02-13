@@ -62,7 +62,16 @@ const DailyHoroscopeSection = () => {
   return (
     <section className="relative w-full" aria-label="ทำนายวันนี้">
       {/* clipPath หลายระดับ: จอเล็กเว้าน้อย จอใหญ่เว้ามาก */}
-      <svg width={0} height={0} className="absolute" aria-hidden>
+      <motion.svg
+        width={0}
+        height={0}
+        className="absolute"
+        aria-hidden
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, delay: 0.05 }}
+      >
         <defs>
           <clipPath id="daily-horoscope-concave-sm" clipPathUnits="objectBoundingBox">
             <path d="M 0 0 Q 0.5 0.06 1 0 L 1 1 Q 0.5 0.94 0 1 Z" />
@@ -74,7 +83,7 @@ const DailyHoroscopeSection = () => {
             <path d="M 0 0 Q 0.5 0.2 1 0 L 1 1 Q 0.5 0.8 0 1 Z" />
           </clipPath>
         </defs>
-      </svg>
+      </motion.svg>
       <div className="absolute top-0 left-0 h-full w-full">
         <ConcentricGlow />
       </div>
@@ -82,7 +91,8 @@ const DailyHoroscopeSection = () => {
         className="daily-horoscope-clipped flex flex-col drop-shadow-lg shadow-2xs items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
         variants={staggerContainer}
         initial="initial"
-        animate="animate"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
       >
         {/* ซ้าย: รูปแอป */}
         <motion.div

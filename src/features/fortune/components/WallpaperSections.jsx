@@ -2,7 +2,19 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { useIsMobile } from '@/hooks/use-mobile'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+}
+
+const staggerContainer = {
+  animate: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
 
 const PURPLE = '130, 110, 210'
 const SIZES = [500, 600, 700, 800, 900, 1000, 1100] // diameter แต่ละชั้น
@@ -140,12 +152,20 @@ const WallpaperSections = () => {
       </div>
       <div className="mx-auto">
         {/* แถบการ์ด: กลางใหญ่สุด ค่อยๆ เล็กลงซ้ายขวา กลางอยู่บนสุด (z-index สูงสุด) */}
-        <div
+        <motion.div
           className="daily-horoscope-clipped flex flex-col items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <div>
             {/* Header */}
-            <header className="mb-8 text-center lg:mt-10 mt-5 sm:mb-10">
+            <motion.header
+              className="mb-8 text-center lg:mt-10 mt-5 sm:mb-10"
+              variants={fadeUp}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
               <h2 className="text-2xl font-bold text-[#5C4B9E] sm:text-3xl">
                 วอลเปเปอร์มงคล
               </h2>
@@ -153,10 +173,12 @@ const WallpaperSections = () => {
                 วอลเปเปอร์มงคลเฉพาะบุคคล ออกแบบตามพลังดวงและคำทำนายของคุณ <br />
                 เพื่อเสริมพลังชีวิต โชคลาภ และความราบรื่นในทุกวัน
               </p>
-            </header>
-            <div
+            </motion.header>
+            <motion.div
               ref={containerRef}
               className="flex justify-center overflow-x-hidden overflow-y-visible pb-4 pt-2 sm:overflow-x-auto scrollbar-hide"
+              variants={fadeUp}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <div className="flex items-center justify-center gap-0 px-2 sm:px-4">
                 {WALLPAPERS.map((wallpaper, index) => {
@@ -195,10 +217,10 @@ const WallpaperSections = () => {
                   )
                 })}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   )

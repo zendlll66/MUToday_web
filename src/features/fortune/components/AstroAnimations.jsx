@@ -36,10 +36,8 @@ const AstroAnimations = () => {
         <motion.div
             className="absolute  lg:left-[10%] md:top-[10%] top-[10%] lg:top-[-50%] inline-block aspect-square w-[min(100vw,1080px)] md:w-[min(100vw,1080px)] lg:w-[min(50vw,1080px)] min-w-[320px]"
             initial={{ opacity: 0, y: 12 }}
-            animate={{
-                opacity: 1,
-                y: 0,
-            }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
