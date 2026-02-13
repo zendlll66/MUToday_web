@@ -32,7 +32,7 @@ const Card = () => {
       numCards: 14,
       duration: 1.2,
       stepDelay: 0.1,
-      autoFlipInterval: 5000,
+      autoFlipInterval: 10000,
       hoverMode: 'spread',
       cardImages,
       backImage: '/card/back.webp',

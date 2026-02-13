@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Banner from '@/components/ui/Banner'
+import EventBannerAPI from '@/lib/api/enpoints/event-banner.api'
 import FeedAPI from '@/lib/api/enpoints/feed.api'
 import GuestAPI from '@/lib/api/enpoints/guest.api'
 import Token from '@/lib/api/axios/token'
@@ -9,40 +10,13 @@ import ClubContentClient from '@/features/clubs/components/ClubContentClient'
 
 const HomePage = () => {
     const [feedData, setFeedData] = useState(null)
+    const [bannerData, setBannerData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [loadingMore, setLoadingMore] = useState(false)
     const [page, setPage] = useState(1)
     const loadMoreRef = useRef(null)
     const loadingMoreRef = useRef(false)
     const router = useRouter()
-    
-    const mockBannerData = {
-        "status": 200,
-        "success": true,
-        "message": "Success",
-        "data": [
-            {
-                "id": "1571366b-1f72-4277-9e8a-7c7413c2f916",
-                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/bannerBeforeBuy.webp",
-                "link": "https://stg-ticket-mutoday-frontend.mutoday.com/events/690acc16e043308f3d17a24f?a=1&token=019c1a87-050f-7d1e-96eb-4463d4642737"
-            },
-            {
-                "id": "9ef118e9-0ea9-4f1f-b5da-6f2d645ef52e",
-                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/bpBanner.webp",
-                "link": ""
-            },
-            {
-                "id": "6d7d99fa-9f07-41fa-aaaf-9b22a8ed26ce",
-                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/gundamBanner.jpg",
-                "link": ""
-            },
-            {
-                "id": "fd78e892-2728-4344-abab-6fb55968ed6e",
-                "img": "https://trscgkhvrgonyogctiqb.supabase.co/storage/v1/object/public/mu-file/event/mhwBanner.jpg",
-                "link": ""
-            }
-        ]
-    }
 
     const handlePostDetail = (postId) => {
         router.push(`/post/${postId}`)
@@ -99,10 +73,21 @@ const HomePage = () => {
             }
         }
 
+        const fetchBanners = async () => {
+            try {
+                const res = await EventBannerAPI.getBanners()
+                const list = res?.data?.data
+                setBannerData(Array.isArray(list) ? list : [])
+            } catch {
+                setBannerData([])
+            }
+        }
+
         const fetchFeed = async () => {
             setLoading(true)
             try {
                 await ensureGuestToken()
+                fetchBanners()
                 const response = await FeedAPI.getFeed()
                 setFeedData(response || null)
             } catch (error) {
@@ -139,11 +124,15 @@ const HomePage = () => {
         return () => (el ? observer.unobserve(el) : undefined)
     }, [loadMore])
 
+    const hasBanners = Array.isArray(bannerData) && bannerData.length > 0
+
     return (
         <>
-            <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6'>
-                <Banner banners={mockBannerData.data} />
-            </div>
+            {hasBanners && (
+                <div className='w-full min-w-0 max-w-[810px] mx-auto mt-2 px-4 sm:px-6'>
+                    <Banner banners={bannerData} />
+                </div>
+            )}
             <div className='w-full min-w-0 max-w-[810px] sm:max-w-[600px] md:max-w-[800px] mx-auto min-h-screen flex flex-col items-center py-4 px-4 sm:px-6 cursor-pointer'>
                 <ClubContentClient data={feedData} onPostClick={handlePostDetail} loading={loading && !feedData} />
                 {feedData?.data?.feedPublicV2?.data?.meta?.hasNextPage && (

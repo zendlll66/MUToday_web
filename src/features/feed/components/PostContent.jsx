@@ -18,7 +18,7 @@ const PostContent = ({ postDetail, hashTag, user, createdAt, backgroundImage, co
 
         // ถ้ามี hashTag array ให้ highlight คำเหล่านั้น
         if (hashTag && hashTag.length > 0) {
-            return highlightHashTags(text, hashTag, textColor)
+            return highlightHashTags(text, hashTag, '#000000')
         }
 
         // ถ้าไม่มี hashTag array ใช้สีดำเป็นค่าเริ่มต้น
