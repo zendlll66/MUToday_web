@@ -77,15 +77,7 @@ const AstroAnimations = () => {
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <motion.div
                         className="relative w-[15%] aspect-square"
-                        animate={{
-                            scale: [1, 1.06, 1],
-                            opacity: [0.9, 1, 0.9],
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
+                       
                     >
                         <Image
                             src="/astro-component/logo-glass.svg"

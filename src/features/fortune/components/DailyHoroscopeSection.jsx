@@ -1,5 +1,20 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+}
+
+const staggerContainer = {
+  animate: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
+
 /** วงกลมซ้อน 7 ชั้น เป็น div สีซ้อนกัน: วงกลาง 500px, ถัดไป +100px (ปรับ opacity ได้) */
 const PURPLE = '130, 110, 210'
 const SIZES = [500, 600, 700, 800, 900, 1000, 1100] // diameter แต่ละชั้น
@@ -63,11 +78,18 @@ const DailyHoroscopeSection = () => {
       <div className="absolute top-0 left-0 h-full w-full">
         <ConcentricGlow />
       </div>
-      <div
+      <motion.div
         className="daily-horoscope-clipped flex flex-col drop-shadow-lg shadow-2xs items-center justify-center bg-[#F4F3FF] py-12 px-4 sm:py-16 lg:flex-row lg:gap-12 lg:py-20 lg:px-8"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
       >
         {/* ซ้าย: รูปแอป */}
-        <div className="flex flex-col items-center lg:flex-1 lg:items-end lg:justify-center">
+        <motion.div
+          className="flex flex-col items-center lg:flex-1 lg:items-end lg:justify-center"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <Image
             src="/img/app.svg"
             alt="แอปทำนายวันนี้"
@@ -75,19 +97,28 @@ const DailyHoroscopeSection = () => {
             height={580}
             className="w-full max-w-[280px] py-8 sm:max-w-[320px] lg:max-w-[360px]"
           />
-        </div>
+        </motion.div>
 
         {/* ขวา: หัวข้อ + รายการฟีเจอร์ (อยู่ข้างรูป) */}
-        <div className="mt-8 mb-8 w-full mx-auto justify-center items-center lg:items-start max-w-md lg:mt-8 lg:flex-1 md:pb-20 lg:max-w-none">
+        <motion.div
+          className="mt-8 mb-8 w-full mx-auto justify-center items-center lg:items-start max-w-md lg:mt-8 lg:flex-1 md:pb-20 lg:max-w-none"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <h2 className="mb-2 text-2xl font-bold text-mu-text sm:text-3xl text-center lg:text-left">ดวงรายวัน</h2>
           <p className="mb-6   text-sm text-mu-text/80 sm:mb-8 sm:text-base text-center lg:mx-0 lg:text-left max-w-[230px] mx-auto">
             อัปเดตพลังดวงในแต่ละวัน เพื่อให้คุณใช้ชีวิตได้ตรงจังหวะที่สุด
           </p>
-          <ul className="flex flex-col gap-2 justify-center w-fit items-start lg:items-start mx-auto lg:mx-0">
+          <motion.ul
+            className="flex flex-col gap-2 justify-center w-fit items-start lg:items-start mx-auto lg:mx-0"
+            variants={staggerContainer}
+          >
             {FEATURES.map((item) => (
-              <li
+              <motion.li
                 key={item.id}
                 className="flex items-center gap-4 justify-center"
+                variants={fadeUp}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
               >
                 <span
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm sm:h-11 sm:w-11"
@@ -104,11 +135,11 @@ const DailyHoroscopeSection = () => {
                 <span className="text-sm font-medium text-mu-text sm:text-base">
                   {item.label}
                 </span>
-              </li>
+              </motion.li>
             ))}
-          </ul>
-        </div>
-      </div>
+          </motion.ul>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

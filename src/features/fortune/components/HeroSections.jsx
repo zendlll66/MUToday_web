@@ -2,7 +2,19 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import AstroAnimations from './AstroAnimations'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+}
+
+const staggerContainer = {
+  animate: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
 
 const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sevensolutions.mutoday&pli=1'
 const APP_STORE_URL = 'https://apps.apple.com/th/app/mutoday-astrology/id6475958471'
@@ -25,8 +37,17 @@ export const HeroSections = () => {
   return (
     <section className="relative grid  w-full grid-cols-1 items-center gap-8  px-4 py-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12 lg:px-8 lg:py-14">
       {/* Left: Branding + CTA */}
-      <div className="flex flex-col items-center lg:items-start justify-center px-0 lg:px-4">
-        <div className="mb-6 flex items-center gap-2">
+      <motion.div
+        className="flex flex-col items-center lg:items-start justify-center px-0 lg:px-4"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
+        <motion.div
+          className="mb-6 flex items-center gap-2"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <Image
             src="/icons/logo03.svg"
             alt="MUToday"
@@ -34,19 +55,35 @@ export const HeroSections = () => {
             height={120}
             className="h-full w-full"
           />
-        </div>
+        </motion.div>
 
-        <h1 className="mb-7 font-medium tracking-tight text-mu-blue text-7xl">
+        <motion.h1
+          className="mb-7 font-medium tracking-tight text-mu-blue text-7xl"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           มูทูเดย์
-        </h1>
-        <p className="mb-1 text-3xl font-medium text-mu-blue">
+        </motion.h1>
+        <motion.p
+          className="mb-1 text-3xl font-medium text-mu-blue"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           ชุมชนของคนสายมู
-        </p>
-        <p className="mb-2 text-md text-mu-blue">
+        </motion.p>
+        <motion.p
+          className="mb-2 text-md text-mu-blue"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           ดาวน์โหลดแอปพลิเคชันมูทูเดย์ได้แล้ววันนี้
-        </p>
+        </motion.p>
 
-        <div className="flex flex-row mt-2 items-center justify-center gap-3">
+        <motion.div
+          className="flex flex-row mt-2 items-center justify-center gap-3"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <a
             href={APP_STORE_URL}
             onClick={handleDownload}
@@ -88,8 +125,8 @@ export const HeroSections = () => {
             </svg>
             <span className="relative z-10 font-semibold">Google Play</span>
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Right: Astro chart / animation */}
       <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-[480px]">
